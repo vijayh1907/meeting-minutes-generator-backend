@@ -8,6 +8,7 @@ from typing import List, Optional
 from datetime import datetime
 
 app = FastAPI()
+next_id = None
 
 # Allow requests from your frontend (e.g., http://localhost:8000)
 app.add_middleware(
@@ -17,6 +18,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 def read_meetings_from_json(filename="meet_data.json"):
     if not os.path.exists(filename):
@@ -76,6 +78,28 @@ def read_participants_from_json(filename="participants.json"):
         raise HTTPException(status_code=500, detail=f"Error reading {filename}: {str(e)}")
 
 
+def compare_and_flag_category_changes(received_data, filename="classified_transcripts.json"):
+    # Load reference data
+    with open(filename, encoding="utf-8") as f:
+        reference_data = json.load(f)
+    
+    # Build a lookup for reference categories (assuming matching by index)
+    for idx, item in enumerate(received_data):
+        # Defensive: check if index exists in reference
+        if idx < len(reference_data):
+            raw_trans_line_old = reference_data[idx].get("raw_transcript_line") 
+            raw_trans_line_new = item.get("raw_transcript_line")
+            if raw_trans_line_old == raw_trans_line_new:
+                old_category = reference_data[idx].get("category")
+                new_category = item.get("category")
+                if new_category != old_category:
+                    item["category"] = new_category
+                    item["old_category"] = old_category 
+        #else:
+            #item["old_category"] = None
+    return received_data
+
+
 @app.get("/")
 def get_meetings():
     meetings = read_meetings_from_json()
@@ -101,7 +125,7 @@ async def upload_meeting_files(
     transcriptFile: UploadFile = File(...),
     attachments: Optional[List[UploadFile]] = File(None)
 ):
-    
+    global next_id
     # Get next id from meet_data.json
     try:
         meetings = read_meetings_from_json()
@@ -141,8 +165,7 @@ async def upload_meeting_files(
     upsert_dict_to_json_list(meet_data)
 
     # Get this response from backend to be sent to UI for generated MOM display
-    
-    
+
     mom = read_participants_from_json(filename="classified_transcripts.json")
     for item in mom:
         if item['confidence'] < 0.8 :
@@ -153,6 +176,20 @@ async def upload_meeting_files(
     return JSONResponse(content=mom) 
 
 
+@app.post("/review_content_classify")
+async def review_content(
+    transcripts_reviewed: str = Form(...)  # JSON string, parse in backend
+):
+    transcripts_reviewed = json.loads(transcripts_reviewed) 
+    result = compare_and_flag_category_changes(transcripts_reviewed)
+    # Storing the result in reviewed_transcripts.json file with meeting_id key and value from meet_data.json 
+    # and transcripts as another key with value as received_data  
+    updated_transcripts = {}
+    updated_transcripts['meeting_id'] = next_id
+    updated_transcripts['transcripts'] = result
+    with open("reviewed_transcripts.json","w",encoding="utf-8" )as f:
+        json.dump(updated_transcripts,f,indent=2)
+    return result
 
 @app.get("/health")
 def health():

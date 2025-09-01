@@ -166,49 +166,23 @@
   },
   {
     "id": "6",
-    "title": "Sprint plan 1",
-    "date": "2025-01-09",
+    "title": "Sprint plan",
+    "date": "2025-09-01",
     "status": "processing",
     "fileName": "call_transcript.txt",
     "fileSize": "10.12 KB",
-    "createdAt": "2025-09-01T15:17:18.281941",
-    "lastModified": "2025-09-01T15:17:18.281941",
+    "createdAt": "2025-09-01T18:17:01.237824",
+    "lastModified": "2025-09-01T18:17:01.237824",
     "emailSent": false,
     "participants": [
-      {
-        "id": "1",
-        "name": "John Smith",
-        "email": "john.smith@company.com"
-      }
-    ],
-    "discussionCount": 63,
-    "actionCount": 22,
-    "questionCount": 46
-  },
-  {
-    "id": "7",
-    "title": "Daily call",
-    "date": "2025-08-23",
-    "status": "processing",
-    "fileName": "call_transcript.txt",
-    "fileSize": "10.12 KB",
-    "createdAt": "2025-09-01T15:30:03.973680",
-    "lastModified": "2025-09-01T15:30:03.973680",
-    "emailSent": false,
-    "participants": [
-      {
-        "id": "2",
-        "name": "Sarah Johnson",
-        "email": "sarah.johnson@company.com"
-      },
       {
         "id": "3",
         "name": "Mike Chen",
         "email": "mike.chen@company.com"
       }
     ],
-    "discussionCount": 63,
-    "actionCount": 22,
-    "questionCount": 46
+    "discussionCount": 2,
+    "actionCount": 1,
+    "questionCount": 0
   }
 ]
