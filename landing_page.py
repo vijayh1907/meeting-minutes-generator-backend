@@ -1,9 +1,11 @@
 import os
 import json
 from pydantic import BaseModel
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from typing import List, Optional
+from datetime import datetime
 
 app = FastAPI()
 
@@ -34,13 +36,13 @@ def count_categories(filename="classified_transcripts.json"):
     action_count = sum(1 for item in data if item.get("category") == "Action")
     question_count = sum(1 for item in data if item.get("category") == "Question")
     return {
-        "discussion": discussion_count,
-        "action": action_count,
-        "question": question_count
+        "discussionCount": discussion_count,
+        "actionCount": action_count,
+        "questionCount": question_count
     }
 
 
-def append_dict_to_json_list(new_dict, filename="meet_data.json"):
+def upsert_dict_to_json_list(new_dict, filename="meet_data.json"):
     # Read existing list from JSON file
     if os.path.exists(filename):
         with open(filename, encoding="utf-8") as f:
@@ -49,8 +51,15 @@ def append_dict_to_json_list(new_dict, filename="meet_data.json"):
             data = []
     else:
         data = []
-    # Append the new dictionary
-    data.append(new_dict)
+     # Check if id exists and update, else append
+    updated = False
+    for idx, item in enumerate(data):
+        if str(item.get("id")) == str(new_dict.get("id")):
+            data[idx] = new_dict
+            updated = True
+            break
+    if not updated:
+        data.append(new_dict)
     # Write back to the file
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
@@ -83,40 +92,63 @@ def get_participant_list():
 # 3. Return that structure to UI for display on ReviewScreen page
 # 4. Another function to count no of discussions,questions and Action , add to the new structure along with other meeting details and add dictionary to list in meet_data.json
 
-# Below to be changed based on input structure to pass to backend
-class Participant(BaseModel):
-    id: str
-    name: str
-    email: str
+# Post API needs to be integrated with UI to refelect post request hit once generate MOM is clicked
+@app.post("/upload_meeting_files")
+async def upload_meeting_files(
+    meetingTitle: str = Form(...),
+    meetingDate: str = Form(...),
+    participants: str = Form(...),  # JSON string, parse in backend
+    transcriptFile: UploadFile = File(...),
+    attachments: Optional[List[UploadFile]] = File(None)
+):
+    
+    # Get next id from meet_data.json
+    try:
+        meetings = read_meetings_from_json()
+        if meetings and isinstance(meetings, list):
+            max_id = max(int(m.get("id", 0)) for m in meetings)
+            next_id = str(max_id + 1)
+        else:
+            next_id = "1"
+    except Exception:
+        next_id = "1"
 
-# endpoint to be changed based on structure to pass to backend
-@app.post("/add_participant")
-def add_participant(participant: Participant):
-    # Read existing participants
-    mom = read_participants_from_json(filename="classified_transcripts.json")
     meet_data = {}
+    meet_data['id'] = next_id
+    # Getting parameters from UI form data
+    meet_data['title'] = meetingTitle
+    meet_data['date'] = meetingDate
+    meet_data['status'] = 'processing'
+    meet_data['fileName'] = transcriptFile.filename
+    
+    # Get file size in KB
+    contents = await transcriptFile.read()
+    file_size_kb = len(contents) / 1024
+    await transcriptFile.seek(0)  # Reset file pointer if you need to read again
+    meet_data['fileSize'] = f"{file_size_kb:.2f} KB"
+    
+    meet_data['createdAt'] = datetime.now().isoformat()
+    meet_data['lastModified'] = datetime.now().isoformat()
+    meet_data['emailSent'] = False 
+
+    # Below logic updated to put selected participants from UI and update  and then read it
+    meet_data['participants'] = json.loads(participants)
+    
+    # Add counts from classified_transcripts.json
+    meet_data.update(count_categories())
+
+    # Write back to the file post checking id existance
+    upsert_dict_to_json_list(meet_data)
+
+    # Get this response from backend to be sent to UI for generated MOM display
+    
+    
+    mom = read_participants_from_json(filename="classified_transcripts.json")
     for item in mom:
         if item['confidence'] < 0.8 :
             item['needs_review'] = True
         else:
             item['needs_review'] = False
-    
-    # Example usage:
-    meet_data = count_categories()
-    # Get this from input structure
-    meet_data['title'] = 'Sample meet'
-    meet_data['date'] = '2025-01-2024'
-    meet_data['status'] = 'Processing'
-    meet_data['fileName'] = 'sample.txt'
-    meet_data['fileSize'] = '2MB'
-    meet_data['createdAt'] = '2025-01-24T10:00:00Z'
-    meet_data['lastModified'] = '2025-01-24T10:00:00Z'
-    meet_data['emailSent'] = False
-    meet_data['participants'] = read_participants_from_json(filename='participants.json')
-    
-
-    # Write back to the file
-    append_dict_to_json_list(meet_data)
 
     return JSONResponse(content=mom) 
 
