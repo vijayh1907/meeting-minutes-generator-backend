@@ -57,10 +57,10 @@
     "category": "Discussion",
     "tags": [
       "greeting",
-      "start"
+      "screen sharing"
     ],
     "confidence": 0.8,
-    "notes": "Opening of the meeting."
+    "notes": "Opening the meeting and checking screen visibility."
   },
   {
     "raw_transcript_line": "**[00:00:12]** Yes, looking good. Are we recording this session?",
@@ -69,14 +69,13 @@
       "recording"
     ],
     "confidence": 0.9,
-    "notes": "Question about recording the session."
+    "notes": "Inquiring about recording the session."
   },
   {
     "raw_transcript_line": "**[00:00:18]** Sorry, am I audible? My headset was acting up this morning.",
     "category": "Question",
     "tags": [
-      "audio",
-      "headset"
+      "audio"
     ],
     "confidence": 0.8,
     "notes": "Checking audio issues."
@@ -88,8 +87,8 @@
       "audio",
       "recording"
     ],
-    "confidence": 0.8,
-    "notes": "Response to audio check."
+    "confidence": 0.9,
+    "notes": "Confirming audio and agreeing to record."
   },
   {
     "raw_transcript_line": "**[00:00:32]** Hold on, I'm having WiFi issues. Give me just a second to reconnect.",
@@ -98,8 +97,8 @@
       "WiFi",
       "reconnect"
     ],
-    "confidence": 0.7,
-    "notes": "Action to resolve WiFi issues."
+    "confidence": 0.8,
+    "notes": "Taking action to resolve WiFi issues."
   },
   {
     "raw_transcript_line": "**[00:00:40]** No problem. While we wait, let me share the agenda for today's sprint review.",
@@ -108,25 +107,23 @@
       "agenda",
       "sprint review"
     ],
-    "confidence": 0.8,
+    "confidence": 0.9,
     "notes": "Sharing the agenda."
   },
   {
     "raw_transcript_line": "**[00:00:48]** Can you make the screen a bit larger? The font is quite small on my end.",
     "category": "Question",
     "tags": [
-      "screen",
-      "font size"
+      "screen size"
     ],
     "confidence": 0.9,
-    "notes": "Request to adjust screen size."
+    "notes": "Requesting to adjust screen size."
   },
   {
     "raw_transcript_line": "**[00:00:55]** Same here, maybe zoom in a bit?",
     "category": "Question",
     "tags": [
-      "screen",
-      "zoom"
+      "screen size"
     ],
     "confidence": 0.9,
     "notes": "Another request for screen adjustment."
@@ -135,62 +132,57 @@
     "raw_transcript_line": "**[00:01:02]** Better now? I've increased it to 120%.",
     "category": "Discussion",
     "tags": [
-      "screen",
-      "adjustment"
+      "screen size"
     ],
     "confidence": 0.9,
-    "notes": "Response to screen adjustment request."
+    "notes": "Confirming screen adjustment."
   },
   {
     "raw_transcript_line": "**[00:01:08]** Perfect, thanks. Are you back with us?",
     "category": "Question",
     "tags": [
-      "audio",
-      "check"
+      "audio"
     ],
     "confidence": 0.9,
-    "notes": "Checking if participant is back."
+    "notes": "Checking if the participant is back."
   },
   {
     "raw_transcript_line": "**[00:01:14]** Yes, sorry about that. My home router decided to restart itself apparently.",
     "category": "Discussion",
     "tags": [
-      "WiFi",
-      "router"
+      "WiFi"
     ],
     "confidence": 0.8,
-    "notes": "Explanation for delay."
+    "notes": "Explaining the reason for disconnection."
   },
   {
     "raw_transcript_line": "**[00:01:22]** *coughing* Sorry, excuse me. So today we're reviewing our Q3 forecasting model performance.",
     "category": "Discussion",
     "tags": [
       "review",
-      "Q3",
       "forecasting"
     ],
-    "confidence": 0.8,
-    "notes": "Introduction to the main topic."
+    "confidence": 0.9,
+    "notes": "Introducing the main topic of the meeting."
   },
   {
     "raw_transcript_line": "**[00:01:31]** Before we dive in, our accuracy improved by 12% since last sprint.",
     "category": "Discussion",
     "tags": [
       "accuracy",
-      "improvement"
+      "performance"
     ],
     "confidence": 0.9,
-    "notes": "Sharing performance metrics."
+    "notes": "Discussing performance improvement."
   },
   {
     "raw_transcript_line": "**[00:01:38]** That's fantastic! What drove the improvement?",
     "category": "Question",
     "tags": [
-      "improvement",
-      "discussion"
+      "improvement"
     ],
     "confidence": 0.9,
-    "notes": "Question about the reason for improvement."
+    "notes": "Inquiring about the reasons for improvement."
   },
   {
     "raw_transcript_line": "**[00:01:44]** Mainly the new feature engineering we implemented for seasonal patterns.",
@@ -200,26 +192,25 @@
       "seasonal patterns"
     ],
     "confidence": 0.9,
-    "notes": "Explanation of improvement."
+    "notes": "Explaining the reason for improvement."
   },
   {
     "raw_transcript_line": "**[00:01:52]** Can you hear that echo? I think someone's not on mute.",
     "category": "Question",
     "tags": [
-      "audio",
-      "echo"
+      "audio"
     ],
     "confidence": 0.9,
-    "notes": "Checking for audio issues."
+    "notes": "Pointing out audio issues."
   },
   {
     "raw_transcript_line": "**[00:01:58]** Sorry, that was me. I'm muted now.",
     "category": "Action",
     "tags": [
-      "mute"
+      "audio"
     ],
-    "confidence": 0.8,
-    "notes": "Participant addressing audio issue."
+    "confidence": 0.9,
+    "notes": "Acknowledging and resolving audio issue."
   },
   {
     "raw_transcript_line": "**[00:02:04]** Great. So the seasonal patterns - were these specific to retail categories?",
@@ -229,7 +220,7 @@
       "retail"
     ],
     "confidence": 0.9,
-    "notes": "Question about seasonal patterns."
+    "notes": "Inquiring about the specifics of seasonal patterns."
   },
   {
     "raw_transcript_line": "**[00:02:12]** Yes, we segmented by apparel, electronics, and home goods separately.",
@@ -239,17 +230,16 @@
       "categories"
     ],
     "confidence": 0.9,
-    "notes": "Response about segmentation."
+    "notes": "Explaining the segmentation of data."
   },
   {
     "raw_transcript_line": "**[00:02:19]** *phone ringing in background* Sorry, let me just silence this.",
     "category": "Action",
     "tags": [
-      "phone",
-      "silence"
+      "background noise"
     ],
-    "confidence": 0.7,
-    "notes": "Action to silence phone."
+    "confidence": 0.8,
+    "notes": "Addressing background noise."
   },
   {
     "raw_transcript_line": "**[00:02:26]** Electronics showed the most volatile patterns, especially during back-to-school season.",
@@ -259,7 +249,7 @@
       "volatile patterns"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on electronics patterns."
+    "notes": "Discussing findings on electronics."
   },
   {
     "raw_transcript_line": "**[00:02:34]** That makes sense. What about the holiday forecasting? That's our main focus now.",
@@ -268,17 +258,16 @@
       "holiday forecasting"
     ],
     "confidence": 0.9,
-    "notes": "Question about holiday forecasting."
+    "notes": "Shifting focus to holiday forecasting."
   },
   {
     "raw_transcript_line": "**[00:02:42]** Right, so we're looking at Black Friday through New Year's predictions.",
     "category": "Discussion",
     "tags": [
-      "holiday",
-      "predictions"
+      "holiday forecasting"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on holiday predictions."
+    "notes": "Defining the holiday forecasting period."
   },
   {
     "raw_transcript_line": "**[00:02:49]** Are we factoring in the supply chain disruptions from last year?",
@@ -288,7 +277,7 @@
       "disruptions"
     ],
     "confidence": 0.9,
-    "notes": "Question about supply chain factors."
+    "notes": "Inquiring about supply chain considerations."
   },
   {
     "raw_transcript_line": "**[00:02:56]** Good point. We've incorporated those learnings into our risk models.",
@@ -297,17 +286,16 @@
       "risk models"
     ],
     "confidence": 0.9,
-    "notes": "Response about incorporating learnings."
+    "notes": "Confirming incorporation of learnings."
   },
   {
     "raw_transcript_line": "**[00:03:03]** Sorry, can you repeat that? My audio cut out for a second.",
     "category": "Question",
     "tags": [
-      "audio",
-      "repeat"
+      "audio"
     ],
-    "confidence": 0.8,
-    "notes": "Request to repeat information."
+    "confidence": 0.9,
+    "notes": "Requesting repetition due to audio issues."
   },
   {
     "raw_transcript_line": "**[00:03:10]** We've incorporated supply chain risk factors into our holiday models.",
@@ -317,87 +305,80 @@
       "holiday models"
     ],
     "confidence": 0.9,
-    "notes": "Clarification on supply chain factors."
+    "notes": "Reiterating the incorporation of risk factors."
   },
   {
     "raw_transcript_line": "**[00:03:17]** Perfect. What's our confidence level on these forecasts?",
     "category": "Question",
     "tags": [
-      "confidence",
-      "forecasts"
+      "confidence level"
     ],
     "confidence": 0.9,
-    "notes": "Question about confidence level."
+    "notes": "Inquiring about confidence in forecasts."
   },
   {
     "raw_transcript_line": "**[00:03:24]** We're sitting at about 85% accuracy for the main holiday period.",
     "category": "Discussion",
     "tags": [
       "accuracy",
-      "holiday"
+      "holiday period"
     ],
     "confidence": 0.9,
-    "notes": "Sharing accuracy level."
+    "notes": "Providing accuracy level."
   },
   {
     "raw_transcript_line": "**[00:03:31]** *typing sounds* Sorry, just taking notes. That's impressive given last year's volatility.",
     "category": "Discussion",
     "tags": [
-      "notes",
-      "impressive"
+      "notes"
     ],
     "confidence": 0.8,
-    "notes": "Acknowledgment of performance."
+    "notes": "Acknowledging the accuracy."
   },
   {
     "raw_transcript_line": "**[00:03:39]** The challenge is the post-holiday inventory management predictions.",
     "category": "Discussion",
     "tags": [
-      "challenge",
       "inventory management"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on challenges."
+    "notes": "Identifying challenges."
   },
   {
     "raw_transcript_line": "**[00:03:46]** Oh, I think I'm getting some feedback. Can everyone check their mics?",
     "category": "Question",
     "tags": [
-      "feedback",
       "audio"
     ],
     "confidence": 0.9,
-    "notes": "Request to check audio."
+    "notes": "Requesting participants to check audio."
   },
   {
     "raw_transcript_line": "**[00:03:53]** I hear it too. Let me adjust my settings.",
     "category": "Action",
     "tags": [
-      "settings",
-      "adjust"
+      "audio"
     ],
-    "confidence": 0.8,
-    "notes": "Action to adjust settings."
+    "confidence": 0.9,
+    "notes": "Taking action to resolve audio feedback."
   },
   {
     "raw_transcript_line": "**[00:04:00]** Better now? Okay, so inventory management - what's the main issue there?",
     "category": "Question",
     "tags": [
-      "inventory management",
-      "issue"
+      "inventory management"
     ],
     "confidence": 0.9,
-    "notes": "Question about inventory management issues."
+    "notes": "Inquiring about inventory management issues."
   },
   {
     "raw_transcript_line": "**[00:04:08]** Return patterns have become less predictable since the policy changes.",
     "category": "Discussion",
     "tags": [
-      "return patterns",
-      "policy changes"
+      "return patterns"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on return patterns."
+    "notes": "Discussing return pattern issues."
   },
   {
     "raw_transcript_line": "**[00:04:15]** Are we tracking online versus in-store return behaviors separately?",
@@ -407,17 +388,17 @@
       "returns"
     ],
     "confidence": 0.9,
-    "notes": "Question about tracking returns."
+    "notes": "Inquiring about tracking methods."
   },
   {
     "raw_transcript_line": "**[00:04:22]** Yes, and the data shows completely different patterns for each channel.",
     "category": "Discussion",
     "tags": [
-      "data",
-      "patterns"
+      "tracking",
+      "returns"
     ],
     "confidence": 0.9,
-    "notes": "Response about tracking returns."
+    "notes": "Confirming tracking of different channels."
   },
   {
     "raw_transcript_line": "**[00:04:29]** *dog barking in background* Sorry everyone, working from home today.",
@@ -425,8 +406,8 @@
     "tags": [
       "background noise"
     ],
-    "confidence": 0.7,
-    "notes": "Participant addressing background noise."
+    "confidence": 0.8,
+    "notes": "Addressing background noise."
   },
   {
     "raw_transcript_line": "**[00:04:36]** No worries. So different patterns - can you quantify that difference?",
@@ -436,17 +417,16 @@
       "patterns"
     ],
     "confidence": 0.9,
-    "notes": "Question about quantifying differences."
+    "notes": "Requesting quantification of differences."
   },
   {
     "raw_transcript_line": "**[00:04:43]** Online returns peak around January 15th, store returns are more spread out.",
     "category": "Discussion",
     "tags": [
-      "online returns",
-      "store returns"
+      "returns"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on return patterns."
+    "notes": "Discussing return patterns."
   },
   {
     "raw_transcript_line": "**[00:04:50]** That's a two-week delay compared to historical patterns.",
@@ -456,7 +436,7 @@
       "historical patterns"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on delays."
+    "notes": "Discussing delays."
   },
   {
     "raw_transcript_line": "**[00:04:57]** Interesting. Is this consistent across all retail categories?",
@@ -466,7 +446,7 @@
       "retail categories"
     ],
     "confidence": 0.9,
-    "notes": "Question about consistency."
+    "notes": "Inquiring about consistency."
   },
   {
     "raw_transcript_line": "**[00:05:04]** Mostly, though apparel shows even longer delays - up to three weeks.",
@@ -476,37 +456,34 @@
       "delays"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on apparel delays."
+    "notes": "Discussing apparel delays."
   },
   {
     "raw_transcript_line": "**[00:05:11]** *connection issues* Sorry, I think I froze for a moment. Did I miss anything?",
     "category": "Question",
     "tags": [
-      "connection",
-      "freeze"
+      "connection issues"
     ],
-    "confidence": 0.8,
-    "notes": "Checking if missed information."
+    "confidence": 0.9,
+    "notes": "Checking if anything was missed."
   },
   {
     "raw_transcript_line": "**[00:05:18]** We were discussing return pattern delays. You're caught up now.",
     "category": "Discussion",
     "tags": [
-      "return patterns",
-      "caught up"
+      "return patterns"
     ],
     "confidence": 0.9,
-    "notes": "Updating participant on discussion."
+    "notes": "Updating on previous discussion."
   },
   {
     "raw_transcript_line": "**[00:05:25]** Thanks. What about the demand forecasting for Q1 next year?",
     "category": "Question",
     "tags": [
-      "demand forecasting",
-      "Q1"
+      "demand forecasting"
     ],
     "confidence": 0.9,
-    "notes": "Question about future forecasting."
+    "notes": "Inquiring about future forecasting."
   },
   {
     "raw_transcript_line": "**[00:05:32]** That's actually our biggest uncertainty right now.",
@@ -515,26 +492,25 @@
       "uncertainty"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on uncertainty."
+    "notes": "Identifying uncertainty."
   },
   {
     "raw_transcript_line": "**[00:05:39]** *baby crying in background* Sorry, let me mute myself.",
     "category": "Action",
     "tags": [
-      "mute"
+      "background noise"
     ],
-    "confidence": 0.7,
-    "notes": "Action to mute due to background noise."
+    "confidence": 0.8,
+    "notes": "Addressing background noise."
   },
   {
     "raw_transcript_line": "**[00:05:46]** Post-holiday consumer spending has been harder to predict lately.",
     "category": "Discussion",
     "tags": [
-      "consumer spending",
-      "predict"
+      "consumer spending"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on consumer spending."
+    "notes": "Discussing consumer spending."
   },
   {
     "raw_transcript_line": "**[00:05:53]** Are we seeing any correlation with economic indicators?",
@@ -544,7 +520,7 @@
       "economic indicators"
     ],
     "confidence": 0.9,
-    "notes": "Question about correlation."
+    "notes": "Inquiring about correlations."
   },
   {
     "raw_transcript_line": "**[00:06:00]** Some correlation with consumer confidence index, but it's weaker than expected.",
@@ -554,7 +530,7 @@
       "consumer confidence"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on correlation findings."
+    "notes": "Discussing correlation findings."
   },
   {
     "raw_transcript_line": "**[00:06:07]** What about social media sentiment? Are we incorporating that data?",
@@ -564,7 +540,7 @@
       "sentiment"
     ],
     "confidence": 0.9,
-    "notes": "Question about social media data."
+    "notes": "Inquiring about sentiment analysis."
   },
   {
     "raw_transcript_line": "**[00:06:14]** We started experimenting with sentiment analysis last month.",
@@ -573,7 +549,7 @@
       "sentiment analysis"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on sentiment analysis."
+    "notes": "Discussing recent experiments."
   },
   {
     "raw_transcript_line": "**[00:06:21]** Early results are promising, especially for fashion and electronics.",
@@ -584,17 +560,16 @@
       "electronics"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on early results."
+    "notes": "Discussing promising results."
   },
   {
     "raw_transcript_line": "**[00:06:28]** *phone notification sounds* Sorry, thought I had everything silenced.",
     "category": "Action",
     "tags": [
-      "notification",
-      "silence"
+      "background noise"
     ],
-    "confidence": 0.7,
-    "notes": "Action to silence notifications."
+    "confidence": 0.8,
+    "notes": "Addressing background noise."
   },
   {
     "raw_transcript_line": "**[00:06:35]** No problem. So sentiment analysis - what's the correlation strength?",
@@ -604,7 +579,7 @@
       "correlation"
     ],
     "confidence": 0.9,
-    "notes": "Question about correlation strength."
+    "notes": "Inquiring about correlation strength."
   },
   {
     "raw_transcript_line": "**[00:06:42]** We're seeing about 0.7 correlation with actual sales in the following week.",
@@ -614,7 +589,7 @@
       "sales"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on correlation findings."
+    "notes": "Providing correlation data."
   },
   {
     "raw_transcript_line": "**[00:06:49]** That's quite strong. Are we planning to integrate this into production models?",
@@ -624,17 +599,17 @@
       "production models"
     ],
     "confidence": 0.9,
-    "notes": "Question about integration."
+    "notes": "Inquiring about integration plans."
   },
   {
     "raw_transcript_line": "**[00:06:56]** That's the plan for next sprint, pending some data quality improvements.",
     "category": "Discussion",
     "tags": [
-      "plan",
+      "integration",
       "data quality"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on future plans."
+    "notes": "Discussing integration plans."
   },
   {
     "raw_transcript_line": "**[00:07:03]** What kind of quality issues are we seeing?",
@@ -643,17 +618,17 @@
       "quality issues"
     ],
     "confidence": 0.9,
-    "notes": "Question about quality issues."
+    "notes": "Inquiring about data quality issues."
   },
   {
     "raw_transcript_line": "**[00:07:10]** Mainly noise from bot accounts and sponsored content skewing the sentiment.",
     "category": "Discussion",
     "tags": [
-      "noise",
-      "bot accounts"
+      "data quality",
+      "noise"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on quality issues."
+    "notes": "Discussing quality issues."
   },
   {
     "raw_transcript_line": "**[00:07:17]** *clearing throat* Excuse me. Have we considered using verified accounts only?",
@@ -662,37 +637,35 @@
       "verified accounts"
     ],
     "confidence": 0.9,
-    "notes": "Question about using verified accounts."
+    "notes": "Inquiring about using verified accounts."
   },
   {
     "raw_transcript_line": "**[00:07:24]** We tried that but the sample size became too small for reliable predictions.",
     "category": "Discussion",
     "tags": [
-      "sample size",
-      "predictions"
+      "sample size"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on sample size."
+    "notes": "Discussing challenges with verified accounts."
   },
   {
     "raw_transcript_line": "**[00:07:31]** What about weighting by follower count or engagement rates?",
     "category": "Question",
     "tags": [
-      "weighting",
-      "follower count"
+      "weighting"
     ],
     "confidence": 0.9,
-    "notes": "Question about weighting."
+    "notes": "Inquiring about weighting methods."
   },
   {
     "raw_transcript_line": "**[00:07:38]** That's actually what we're testing now. Results look promising.",
     "category": "Discussion",
     "tags": [
-      "testing",
-      "results"
+      "weighting",
+      "testing"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on testing results."
+    "notes": "Discussing current testing."
   },
   {
     "raw_transcript_line": "**[00:07:45]** Great. Let's talk about the technical infrastructure for a moment.",
@@ -701,16 +674,16 @@
       "technical infrastructure"
     ],
     "confidence": 0.9,
-    "notes": "Transition to technical discussion."
+    "notes": "Shifting focus to technical infrastructure."
   },
   {
     "raw_transcript_line": "**[00:07:52]** *coffee cup clinking* Sorry, needed my morning caffeine fix.",
     "category": "Action",
     "tags": [
-      "coffee"
+      "background noise"
     ],
-    "confidence": 0.7,
-    "notes": "Participant addressing background noise."
+    "confidence": 0.8,
+    "notes": "Addressing background noise."
   },
   {
     "raw_transcript_line": "**[00:07:59]** Are we still having issues with the model deployment pipeline?",
@@ -719,27 +692,26 @@
       "model deployment"
     ],
     "confidence": 0.9,
-    "notes": "Question about deployment issues."
+    "notes": "Inquiring about deployment issues."
   },
   {
     "raw_transcript_line": "**[00:08:06]** We resolved the Docker container issues from last week.",
     "category": "Discussion",
     "tags": [
       "Docker",
-      "issues"
+      "deployment"
     ],
     "confidence": 0.9,
-    "notes": "Update on deployment issues."
+    "notes": "Confirming resolution of issues."
   },
   {
     "raw_transcript_line": "**[00:08:13]** Excellent. What about the real-time data ingestion?",
     "category": "Question",
     "tags": [
-      "real-time",
       "data ingestion"
     ],
     "confidence": 0.9,
-    "notes": "Question about data ingestion."
+    "notes": "Inquiring about data ingestion."
   },
   {
     "raw_transcript_line": "**[00:08:20]** That's been stable. We're processing about 2 million transactions per hour now.",
@@ -749,7 +721,7 @@
       "transactions"
     ],
     "confidence": 0.9,
-    "notes": "Update on data processing."
+    "notes": "Discussing data ingestion stability."
   },
   {
     "raw_transcript_line": "**[00:08:27]** *construction noise in background* Sorry, they're doing work next door.",
@@ -757,28 +729,27 @@
     "tags": [
       "background noise"
     ],
-    "confidence": 0.7,
-    "notes": "Participant addressing background noise."
+    "confidence": 0.8,
+    "notes": "Addressing background noise."
   },
   {
     "raw_transcript_line": "**[00:08:34]** No worries. So 2 million per hour - that's up from last month?",
     "category": "Question",
     "tags": [
-      "data",
-      "increase"
+      "transactions"
     ],
     "confidence": 0.9,
-    "notes": "Question about data increase."
+    "notes": "Inquiring about transaction increase."
   },
   {
     "raw_transcript_line": "**[00:08:41]** Yes, about 15% increase. Holiday shopping season is starting early this year.",
     "category": "Discussion",
     "tags": [
       "increase",
-      "holiday"
+      "holiday shopping"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on increase."
+    "notes": "Discussing increase in transactions."
   },
   {
     "raw_transcript_line": "**[00:08:48]** Are our servers handling the increased load okay?",
@@ -788,66 +759,63 @@
       "load"
     ],
     "confidence": 0.9,
-    "notes": "Question about server load."
+    "notes": "Inquiring about server performance."
   },
   {
     "raw_transcript_line": "**[00:08:55]** So far so good. We have auto-scaling configured for peak times.",
     "category": "Discussion",
     "tags": [
-      "auto-scaling",
-      "servers"
+      "servers",
+      "auto-scaling"
     ],
     "confidence": 0.9,
-    "notes": "Update on server handling."
+    "notes": "Confirming server handling."
   },
   {
     "raw_transcript_line": "**[00:09:02]** What about data storage? Are we hitting any limits?",
     "category": "Question",
     "tags": [
-      "data storage",
-      "limits"
+      "data storage"
     ],
     "confidence": 0.9,
-    "notes": "Question about data storage."
+    "notes": "Inquiring about data storage limits."
   },
   {
     "raw_transcript_line": "**[00:09:09]** We're at about 70% capacity. Should be fine through the holidays.",
     "category": "Discussion",
     "tags": [
-      "capacity",
-      "holidays"
+      "data storage"
     ],
     "confidence": 0.9,
-    "notes": "Update on data storage capacity."
+    "notes": "Discussing data storage capacity."
   },
   {
     "raw_transcript_line": "**[00:09:16]** *doorbell ringing* Sorry, delivery. I'll stay muted.",
     "category": "Action",
     "tags": [
-      "delivery"
+      "background noise"
     ],
-    "confidence": 0.7,
-    "notes": "Participant addressing delivery."
+    "confidence": 0.8,
+    "notes": "Addressing background noise."
   },
   {
     "raw_transcript_line": "**[00:09:23]** Thanks. Let's discuss the dashboard updates for stakeholders.",
     "category": "Discussion",
     "tags": [
       "dashboard",
-      "updates"
+      "stakeholders"
     ],
     "confidence": 0.9,
-    "notes": "Transition to dashboard discussion."
+    "notes": "Shifting focus to dashboard updates."
   },
   {
     "raw_transcript_line": "**[00:09:30]** The new visualizations are ready for review. Much cleaner interface.",
     "category": "Discussion",
     "tags": [
-      "visualizations",
-      "interface"
+      "visualizations"
     ],
     "confidence": 0.9,
-    "notes": "Update on visualizations."
+    "notes": "Discussing new visualizations."
   },
   {
     "raw_transcript_line": "**[00:09:37]** Great. Are the executives happy with the real-time forecasting display?",
@@ -857,7 +825,7 @@
       "forecasting"
     ],
     "confidence": 0.9,
-    "notes": "Question about executive feedback."
+    "notes": "Inquiring about executive feedback."
   },
   {
     "raw_transcript_line": "**[00:09:44]** They love it. Finally they can see predictions updating throughout the day.",
@@ -867,7 +835,7 @@
       "feedback"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on executive feedback."
+    "notes": "Confirming positive feedback."
   },
   {
     "raw_transcript_line": "**[00:09:51]** *child talking in background* Sorry, kids are home today. Let me find a quieter room.",
@@ -875,46 +843,46 @@
     "tags": [
       "background noise"
     ],
-    "confidence": 0.7,
-    "notes": "Participant addressing background noise."
+    "confidence": 0.8,
+    "notes": "Addressing background noise."
   },
   {
     "raw_transcript_line": "**[00:09:58]** No problem. So real-time updates - how often are we refreshing the models?",
     "category": "Question",
     "tags": [
-      "real-time",
-      "refresh"
+      "refreshing models"
     ],
     "confidence": 0.9,
-    "notes": "Question about model refresh rate."
+    "notes": "Inquiring about model refresh rate."
   },
   {
     "raw_transcript_line": "**[00:10:05]** Every 4 hours during business hours, every 12 hours overnight.",
     "category": "Discussion",
     "tags": [
-      "refresh rate"
+      "refreshing models"
     ],
     "confidence": 0.9,
-    "notes": "Update on refresh rate."
+    "notes": "Providing refresh rate details."
   },
   {
     "raw_transcript_line": "**[00:10:12]** That frequency working well for accuracy versus computational cost?",
     "category": "Question",
     "tags": [
-      "frequency",
-      "accuracy"
+      "accuracy",
+      "cost"
     ],
     "confidence": 0.9,
-    "notes": "Question about frequency effectiveness."
+    "notes": "Inquiring about frequency effectiveness."
   },
   {
     "raw_transcript_line": "**[00:10:19]** Yes, we found diminishing returns beyond 4-hour intervals.",
     "category": "Discussion",
     "tags": [
-      "diminishing returns"
+      "frequency",
+      "returns"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on frequency effectiveness."
+    "notes": "Discussing frequency effectiveness."
   },
   {
     "raw_transcript_line": "**[00:10:26]** Perfect. What about alerts for significant forecast changes?",
@@ -924,75 +892,72 @@
       "forecast changes"
     ],
     "confidence": 0.9,
-    "notes": "Question about alerts."
+    "notes": "Inquiring about alert systems."
   },
   {
     "raw_transcript_line": "**[00:10:33]** We have thresholds set at 15% deviation from previous forecast.",
     "category": "Discussion",
     "tags": [
-      "thresholds",
-      "deviation"
+      "alerts",
+      "thresholds"
     ],
     "confidence": 0.9,
-    "notes": "Update on alert thresholds."
+    "notes": "Discussing alert thresholds."
   },
   {
     "raw_transcript_line": "**[00:10:40]** *connection dropping* Sorry, I think my internet is struggling again.",
     "category": "Action",
     "tags": [
-      "connection"
+      "connection issues"
     ],
-    "confidence": 0.7,
-    "notes": "Participant addressing connection issues."
+    "confidence": 0.8,
+    "notes": "Addressing connection issues."
   },
   {
     "raw_transcript_line": "**[00:10:47]** We can hear you fine. So 15% threshold - is that working well?",
     "category": "Question",
     "tags": [
-      "threshold",
-      "effectiveness"
+      "threshold"
     ],
     "confidence": 0.9,
-    "notes": "Question about threshold effectiveness."
+    "notes": "Inquiring about threshold effectiveness."
   },
   {
     "raw_transcript_line": "**[00:10:54]** Yes, it catches the important changes without too many false alarms.",
     "category": "Discussion",
     "tags": [
-      "effectiveness",
-      "false alarms"
+      "threshold",
+      "alerts"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on threshold effectiveness."
+    "notes": "Confirming threshold effectiveness."
   },
   {
     "raw_transcript_line": "**[00:11:01]** Excellent. Let's talk about testing strategy for the holiday models.",
     "category": "Discussion",
     "tags": [
-      "testing strategy",
-      "holiday models"
+      "testing strategy"
     ],
     "confidence": 0.9,
-    "notes": "Transition to testing strategy discussion."
+    "notes": "Shifting focus to testing strategy."
   },
   {
     "raw_transcript_line": "**[00:11:08]** We're doing A/B testing with 10% of traffic on the new models.",
-    "category": "Discussion",
+    "category": "Action",
     "tags": [
-      "A/B testing",
-      "traffic"
+      "A/B testing"
     ],
     "confidence": 0.9,
-    "notes": "Update on testing strategy."
+    "notes": "Discussing testing methods."
   },
   {
     "raw_transcript_line": "**[00:11:15]** *keyboard typing loudly* Sorry, just updating my notes.",
     "category": "Action",
     "tags": [
-      "typing"
+      "background noise"
     ],
-    "confidence": 0.7,
-    "notes": "Participant addressing typing noise."
+    "confidence": 0.8,
+    "notes": "Addressing background noise."
   },
   {
     "raw_transcript_line": "**[00:11:22]** A/B testing - how long before we have statistical significance?",
@@ -1002,17 +967,17 @@
       "statistical significance"
     ],
     "confidence": 0.9,
-    "notes": "Question about testing duration."
+    "notes": "Inquiring about testing timeline."
   },
   {
     "raw_transcript_line": "**[00:11:29]** About two weeks with current traffic volumes.",
     "category": "Discussion",
     "tags": [
-      "duration",
-      "traffic"
+      "A/B testing",
+      "timeline"
     ],
     "confidence": 0.9,
-    "notes": "Update on testing duration."
+    "notes": "Providing timeline for testing."
   },
   {
     "raw_transcript_line": "**[00:11:36]** That should give us time before the major holiday push starts.",
@@ -1021,17 +986,17 @@
       "holiday push"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on timing."
+    "notes": "Discussing timing."
   },
   {
     "raw_transcript_line": "**[00:11:43]** Exactly. We'll have results by mid-September.",
     "category": "Discussion",
     "tags": [
       "results",
-      "timing"
+      "timeline"
     ],
     "confidence": 0.9,
-    "notes": "Update on results timing."
+    "notes": "Confirming results timeline."
   },
   {
     "raw_transcript_line": "**[00:11:50]** What metrics are we tracking for the A/B test?",
@@ -1041,17 +1006,17 @@
       "A/B testing"
     ],
     "confidence": 0.9,
-    "notes": "Question about metrics."
+    "notes": "Inquiring about metrics."
   },
   {
     "raw_transcript_line": "**[00:11:57]** Forecast accuracy, prediction confidence, and business impact on inventory.",
     "category": "Discussion",
     "tags": [
       "metrics",
-      "forecast accuracy"
+      "A/B testing"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on metrics."
+    "notes": "Discussing metrics tracked."
   },
   {
     "raw_transcript_line": "**[00:12:04]** *fire truck sirens passing by* Sorry, emergency vehicles outside.",
@@ -1059,58 +1024,54 @@
     "tags": [
       "background noise"
     ],
-    "confidence": 0.7,
-    "notes": "Participant addressing background noise."
+    "confidence": 0.8,
+    "notes": "Addressing background noise."
   },
   {
     "raw_transcript_line": "**[00:12:11]** No problem. Business impact - how are we measuring that?",
     "category": "Question",
     "tags": [
-      "business impact",
-      "measurement"
+      "business impact"
     ],
     "confidence": 0.9,
-    "notes": "Question about measurement."
+    "notes": "Inquiring about measurement methods."
   },
   {
     "raw_transcript_line": "**[00:12:18]** Primarily through stockout reduction and inventory turnover improvement.",
     "category": "Discussion",
     "tags": [
-      "stockout",
-      "inventory turnover"
+      "business impact"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on measurement."
+    "notes": "Discussing measurement methods."
   },
   {
     "raw_transcript_line": "**[00:12:25]** That's perfect. Those are the KPIs leadership cares about most.",
     "category": "Discussion",
     "tags": [
-      "KPIs",
-      "leadership"
+      "KPIs"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on KPIs."
+    "notes": "Confirming importance of KPIs."
   },
   {
     "raw_transcript_line": "**[00:12:32]** Speaking of leadership, they want a demo next Friday.",
     "category": "Discussion",
     "tags": [
-      "leadership",
-      "demo"
+      "demo",
+      "leadership"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on demo request."
+    "notes": "Discussing demo request."
   },
   {
     "raw_transcript_line": "**[00:12:39]** *phone buzzing* Sorry, let me silence this completely.",
     "category": "Action",
     "tags": [
-      "phone",
-      "silence"
+      "background noise"
     ],
-    "confidence": 0.7,
-    "notes": "Action to silence phone."
+    "confidence": 0.8,
+    "notes": "Addressing background noise."
   },
   {
     "raw_transcript_line": "**[00:12:46]** Demo next Friday - are we ready for that timeline?",
@@ -1120,27 +1081,25 @@
       "timeline"
     ],
     "confidence": 0.9,
-    "notes": "Question about readiness."
+    "notes": "Inquiring about readiness for demo."
   },
   {
     "raw_transcript_line": "**[00:12:53]** We should be. Just need to prepare some executive-friendly visualizations.",
     "category": "Discussion",
     "tags": [
-      "visualizations",
-      "executive-friendly"
+      "visualizations"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on preparation."
+    "notes": "Discussing preparation for demo."
   },
   {
     "raw_transcript_line": "**[00:13:00]** I can help with that. What format do they prefer?",
     "category": "Question",
     "tags": [
-      "help",
       "format"
     ],
     "confidence": 0.9,
-    "notes": "Offering help with visualizations."
+    "notes": "Offering assistance and inquiring about format."
   },
   {
     "raw_transcript_line": "**[00:13:07]** PowerBI dashboards with high-level summary metrics.",
@@ -1150,17 +1109,16 @@
       "dashboards"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on preferred format."
+    "notes": "Discussing preferred format."
   },
   {
     "raw_transcript_line": "**[00:13:14]** *coughing* Excuse me. I'll have the draft ready by Wednesday for review.",
     "category": "Action",
     "tags": [
-      "draft",
-      "review"
+      "draft"
     ],
-    "confidence": 0.7,
-    "notes": "Action to prepare draft."
+    "confidence": 0.8,
+    "notes": "Addressing background noise and confirming draft readiness."
   },
   {
     "raw_transcript_line": "**[00:13:21]** Perfect. Any other urgent items we need to cover today?",
@@ -1169,7 +1127,7 @@
       "urgent items"
     ],
     "confidence": 0.9,
-    "notes": "Question about additional items."
+    "notes": "Inquiring about additional items."
   },
   {
     "raw_transcript_line": "**[00:13:28]** Just the model documentation updates for compliance.",
@@ -1179,7 +1137,7 @@
       "compliance"
     ],
     "confidence": 0.9,
-    "notes": "Discussion on documentation."
+    "notes": "Discussing documentation updates."
   },
   {
     "raw_transcript_line": "**[00:13:35]** Right, the audit requirements. Where are we on that?",
@@ -1189,17 +1147,17 @@
       "requirements"
     ],
     "confidence": 0.9,
-    "notes": "Question about audit status."
+    "notes": "Inquiring about audit requirements."
   },
   {
     "raw_transcript_line": "**[00:13:42]** About 80% complete. Should be finished by end of week.",
     "category": "Discussion",
     "tags": [
-      "completion",
-      "audit"
+      "audit",
+      "completion"
     ],
     "confidence": 0.9,
-    "notes": "Update on audit completion."
+    "notes": "Providing update on audit status."
   },
   {
     "raw_transcript_line": "**[00:13:49]** *cat meowing loudly* Sorry, my cat wants attention apparently.",
@@ -1207,18 +1165,17 @@
     "tags": [
       "background noise"
     ],
-    "confidence": 0.7,
-    "notes": "Participant addressing background noise."
+    "confidence": 0.8,
+    "notes": "Addressing background noise."
   },
   {
     "raw_transcript_line": "**[00:13:56]** No worries! Alright team, I think we've covered everything on the agenda.",
     "category": "Discussion",
     "tags": [
-      "agenda",
-      "summary"
+      "agenda"
     ],
     "confidence": 0.9,
-    "notes": "Summary of the meeting."
+    "notes": "Summarizing the meeting."
   },
   {
     "raw_transcript_line": "**[00:14:03]** Great meeting everyone. The progress on the holiday forecasting looks solid.",
@@ -1228,7 +1185,7 @@
       "progress"
     ],
     "confidence": 0.9,
-    "notes": "Closing remarks."
+    "notes": "Concluding the meeting positively."
   },
   {
     "raw_transcript_line": "**[00:14:10]** Thanks all. Same time next week?",
@@ -1237,44 +1194,42 @@
       "next meeting"
     ],
     "confidence": 0.9,
-    "notes": "Question about next meeting."
+    "notes": "Inquiring about next meeting."
   },
   {
     "raw_transcript_line": "**[00:14:17]** Works for me. I'll send out the calendar invite.",
     "category": "Action",
     "tags": [
-      "calendar",
-      "invite"
+      "calendar invite"
     ],
     "confidence": 0.9,
-    "notes": "Action to send invite."
+    "notes": "Confirming next meeting and action to send invite."
   },
   {
     "raw_transcript_line": "**[00:14:24]** Perfect. Have a great rest of your day everyone!",
     "category": "Discussion",
     "tags": [
-      "closing",
-      "goodbye"
+      "closing"
     ],
     "confidence": 0.9,
-    "notes": "Closing remarks."
+    "notes": "Closing the meeting."
   },
   {
     "raw_transcript_line": "**[00:14:30]** Thanks, bye everyone!",
     "category": "Discussion",
     "tags": [
-      "goodbye"
+      "closing"
     ],
     "confidence": 0.9,
-    "notes": "Closing remarks."
+    "notes": "Final goodbye."
   },
   {
     "raw_transcript_line": "**[00:14:35]** Bye! *various goodbyes overlapping*",
     "category": "Discussion",
     "tags": [
-      "goodbye"
+      "closing"
     ],
     "confidence": 0.9,
-    "notes": "Closing remarks."
+    "notes": "Final goodbyes."
   }
 ]

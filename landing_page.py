@@ -1,5 +1,7 @@
 import os
 import json
+import time
+from crewAgent1 import main
 from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.responses import JSONResponse
@@ -9,6 +11,7 @@ from datetime import datetime
 
 app = FastAPI()
 next_id = None
+file_path = None
 
 # Allow requests from your frontend (e.g., http://localhost:8000)
 app.add_middleware(
@@ -78,9 +81,10 @@ def read_participants_from_json(filename="participants.json"):
         raise HTTPException(status_code=500, detail=f"Error reading {filename}: {str(e)}")
 
 
-def compare_and_flag_category_changes(received_data, filename="classified_transcripts.json"):
+def compare_and_flag_category_changes(received_data, output_dir = "outputs", filename="classified_transcripts.json"):
+    file_path = os.path.join(output_dir, filename)
     # Load reference data
-    with open(filename, encoding="utf-8") as f:
+    with open(file_path, encoding="utf-8") as f:
         reference_data = json.load(f)
     
     # Build a lookup for reference categories (assuming matching by index)
@@ -125,8 +129,9 @@ async def upload_meeting_files(
     transcriptFile: UploadFile = File(...),
     attachments: Optional[List[UploadFile]] = File(None)
 ):
-    global next_id
+    global next_id, file_path
     # Get next id from meet_data.json
+    # file_path is where classified_transcripts.json is stored post LLM processing
     try:
         meetings = read_meetings_from_json()
         if meetings and isinstance(meetings, list):
@@ -158,15 +163,36 @@ async def upload_meeting_files(
     # Below logic updated to put selected participants from UI and update  and then read it
     meet_data['participants'] = json.loads(participants)
     
-    # Add counts from classified_transcripts.json
-    meet_data.update(count_categories())
 
     # Write back to the file post checking id existance
     upsert_dict_to_json_list(meet_data)
+    # python crewAgent1.py --input call_transcript.txt --out outputs
+    # Call LLM processing script here with subprocess
+    # Example: Call crewAgent1.main from another Python script
 
+    input_file = str(transcriptFile.filename) #"call_transcript.txt"
+    output_dir = "outputs"
+    model = "openai/gpt-4o-mini"
+    temperature = 0.1
+    try:
+        # if next_id is None:
+        #     output_dir = "outputs"
+        # else:
+        #     output_dir = os.path.join("outputs", str(next_id))
+        start_time = time.time()
+        main(input_file, output_dir, model, temperature)
+        end_time = time.time()
+        exec_time = end_time - start_time
+        minutes = int(exec_time // 60)
+        seconds = int(exec_time % 60)
+        print(f"Process execution time: {minutes} min {seconds} sec")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing transcript: {str(e)}")
     # Get this response from backend to be sent to UI for generated MOM display
-
-    mom = read_participants_from_json(filename="classified_transcripts.json")
+    file_path = os.path.join(output_dir, "classified_transcripts.json")
+    # Add counts from classified_transcripts.json
+    meet_data.update(count_categories(file_path))
+    mom = read_participants_from_json(filename=file_path)
     for item in mom:
         if item['confidence'] < 0.8 :
             item['needs_review'] = True
@@ -187,8 +213,11 @@ async def review_content(
     updated_transcripts = {}
     updated_transcripts['meeting_id'] = next_id
     updated_transcripts['transcripts'] = result
-    with open("reviewed_transcripts.json","w",encoding="utf-8" )as f:
+    output_dir = "outputs"
+    reviewed_path = os.path.join(output_dir, "reviewed_transcripts.json")
+    with open(reviewed_path,"w",encoding="utf-8" )as f:
         json.dump(updated_transcripts,f,indent=2)
+    print(f"Reviewed transcripts saved to {reviewed_path}")
     return result
 
 @app.get("/health")
