@@ -1,0 +1,188 @@
+[
+  {
+    "id": "1",
+    "title": "Weekly Team Standup",
+    "date": "2025-01-27",
+    "status": "completed",
+    "participants": [
+      {
+        "id": "1",
+        "name": "John Smith",
+        "email": "john.smith@company.com"
+      },
+      {
+        "id": "2",
+        "name": "Sarah Johnson",
+        "email": "sarah.johnson@company.com"
+      },
+      {
+        "id": "8",
+        "name": "Jennifer Garcia",
+        "email": "jennifer.garcia@company.com"
+      }
+    ],
+    "discussionCount": 8,
+    "questionCount": 3,
+    "actionCount": 6,
+    "fileName": "weekly_standup_jan27.txt",
+    "fileSize": "1.1 MB",
+    "createdAt": "2025-01-27T09:15:00Z",
+    "lastModified": "2025-01-27T09:45:00Z",
+    "emailSent": true
+  },
+  {
+    "id": "2",
+    "title": "Q1 Budget Planning Session",
+    "date": "2025-01-25",
+    "status": "completed",
+    "participants": [
+      {
+        "id": "3",
+        "name": "Mike Chen",
+        "email": "mike.chen@company.com"
+      },
+      {
+        "id": "5",
+        "name": "Robert Wilson",
+        "email": "robert.wilson@company.com"
+      },
+      {
+        "id": "6",
+        "name": "Lisa Anderson",
+        "email": "lisa.anderson@company.com"
+      },
+      {
+        "id": "7",
+        "name": "David Brown",
+        "email": "david.brown@company.com"
+      }
+    ],
+    "discussionCount": 15,
+    "questionCount": 12,
+    "actionCount": 18,
+    "fileName": "q1_budget_planning.txt",
+    "fileSize": "2.8 MB",
+    "createdAt": "2025-01-25T14:30:00Z",
+    "lastModified": "2025-01-25T16:15:00Z",
+    "emailSent": true
+  },
+  {
+    "id": "3",
+    "title": "Product Demo Review",
+    "date": "2025-01-24",
+    "status": "processing",
+    "participants": [
+      {
+        "id": "2",
+        "name": "Sarah Johnson",
+        "email": "sarah.johnson@company.com"
+      },
+      {
+        "id": "4",
+        "name": "Emily Davis",
+        "email": "emily.davis@company.com"
+      },
+      {
+        "id": "9",
+        "name": "Alex Thompson",
+        "email": "alex.thompson@company.com"
+      }
+    ],
+    "discussionCount": 0,
+    "questionCount": 0,
+    "actionCount": 0,
+    "fileName": "product_demo_review.txt",
+    "fileSize": "1.6 MB",
+    "createdAt": "2025-01-24T15:00:00Z",
+    "lastModified": "2025-01-24T15:00:00Z",
+    "emailSent": false
+  },
+  {
+    "id": "4",
+    "title": "Client Strategy Workshop",
+    "date": "2025-01-22",
+    "status": "completed",
+    "participants": [
+      {
+        "id": "1",
+        "name": "John Smith",
+        "email": "john.smith@company.com"
+      },
+      {
+        "id": "4",
+        "name": "Emily Davis",
+        "email": "emily.davis@company.com"
+      },
+      {
+        "id": "10",
+        "name": "Maria Rodriguez",
+        "email": "maria.rodriguez@company.com"
+      },
+      {
+        "id": "11",
+        "name": "Kevin Park",
+        "email": "kevin.park@company.com"
+      }
+    ],
+    "discussionCount": 22,
+    "questionCount": 16,
+    "actionCount": 14,
+    "fileName": "client_strategy_workshop.txt",
+    "fileSize": "3.2 MB",
+    "createdAt": "2025-01-22T10:00:00Z",
+    "lastModified": "2025-01-22T12:30:00Z",
+    "emailSent": true
+  },
+  {
+    "id": "5",
+    "title": "Marketing Campaign Kickoff",
+    "date": "2025-01-18",
+    "status": "failed",
+    "participants": [
+      {
+        "id": "6",
+        "name": "Lisa Anderson",
+        "email": "lisa.anderson@company.com"
+      },
+      {
+        "id": "7",
+        "name": "David Brown",
+        "email": "david.brown@company.com"
+      },
+      {
+        "id": "9",
+        "name": "Alex Thompson",
+        "email": "alex.thompson@company.com"
+      }
+    ],
+    "discussionCount": 0,
+    "questionCount": 0,
+    "actionCount": 0,
+    "fileName": "marketing_kickoff_jan18.txt",
+    "fileSize": "2.1 MB",
+    "createdAt": "2025-01-18T11:00:00Z",
+    "lastModified": "2025-01-18T11:03:00Z",
+    "emailSent": false
+  },
+  {
+    "id": "6",
+    "title": "Sprint plan",
+    "date": "2025-09-01",
+    "status": "processing",
+    "fileName": "call_transcript.txt",
+    "fileSize": "10.12 KB",
+    "createdAt": "2025-09-01T18:17:01.237824",
+    "lastModified": "2025-09-01T18:17:01.237824",
+    "emailSent": false,
+    "participants": [
+      {
+        "id": "3",
+        "name": "Mike Chen",
+        "email": "mike.chen@company.com"
+      }
+    ],
+    "discussionCount": 2,
+    "actionCount": 1,
+    "questionCount": 0
+  }
+]
