@@ -1,7 +1,8 @@
 import os
 import json
 import time
-from crewAgent1 import main
+from crewAgent1 import main as crewAgent1_main
+from crewAgent2 import main as crewAgent2_main
 from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.responses import JSONResponse
@@ -179,23 +180,23 @@ async def upload_meeting_files(
         except Exception as e:
             print(f"[DEBUG] Error reading meetings, using default id: {e}")
             next_id = "1"
-
-        print(f"[DEBUG] Creating meeting data structure...")
-        meet_data = {}
-        meet_data['id'] = next_id
-        # Getting parameters from UI form data
-        meet_data['title'] = meetingTitle
-        meet_data['date'] = meetingDate
-        meet_data['status'] = 'processing'
-        meet_data['fileName'] = transcriptFile.filename
         
-        print(f"[DEBUG] Reading transcript file...")
-        # Get file size in KB
+        # Create meeting data dictionary
+        meet_data = {
+            "id": next_id,
+            "title": meetingTitle,
+            "date": meetingDate,
+            "fileName": transcriptFile.filename,
+        }
+        
+        # Save uploaded transcript file
+        print(f"[DEBUG] Saving transcript file...")
         try:
             contents = await transcriptFile.read()
-            file_size_kb = len(contents) / 1024
-            await transcriptFile.seek(0)  # Reset file pointer if you need to read again
-            meet_data['fileSize'] = f"{file_size_kb:.2f} KB"
+            meet_data['fileSize'] = len(contents)
+            with open(transcriptFile.filename, "wb") as f:
+                f.write(contents)
+            print(f"[DEBUG] File saved: {transcriptFile.filename}")
             print(f"[DEBUG] File read successfully, size: {meet_data['fileSize']}")
         except Exception as e:
             print(f"[DEBUG] Error reading file: {e}")
@@ -249,7 +250,7 @@ async def upload_meeting_files(
             #     output_dir = os.path.join("outputs", str(next_id))
             start_time = time.time()
             print(f"[DEBUG] Calling main() function...")
-            main(input_file, output_dir, model, temperature)
+            crewAgent1_main(input_file, output_dir, model, temperature)
             end_time = time.time()
             exec_time = end_time - start_time
             minutes = int(exec_time // 60)
@@ -333,6 +334,356 @@ async def review_content(
         json.dump(updated_transcripts,f,indent=2)
     print(f"Reviewed transcripts saved to {reviewed_path}")
     return result
+
+
+@app.post("/api/create_mom_and_action_items")
+async def create_mom_and_action_items(
+    meeting_id: str = Form(None),
+    output_format: str = Form("markdown")  # Options: markdown, json, both
+):
+    """
+    Generate Minutes of Meeting (MoM) and Action Items from reviewed transcripts.
+    
+    Args:
+        meeting_id: Optional meeting ID for reference (uses next_id if not provided)
+        output_format: Output format - 'markdown' (default), 'json', or 'both'
+    
+    Returns:
+        JSON response with paths to generated files and action items summary
+    """
+    global next_id
+    
+    print(f"[DEBUG] === Starting create_mom_and_action_items ===")
+    print(f"[DEBUG] Received parameters:")
+    print(f"[DEBUG]   - meeting_id: {meeting_id or next_id}")
+    print(f"[DEBUG]   - output_format: {output_format}")
+    
+    try:
+        # Use provided meeting_id or fall back to next_id
+        current_meeting_id = meeting_id or next_id
+        if not current_meeting_id:
+            print(f"[DEBUG] ERROR: No meeting_id available")
+            raise HTTPException(status_code=400, detail="Meeting ID not found. Please upload meeting files first.")
+        
+        # Define paths
+        input_file = "outputs/reviewed_transcripts.json"
+        output_dir = "outputs"
+        model = "openai/gpt-4o-mini"
+        temperature = 0.2
+        
+        print(f"[DEBUG] Configuration:")
+        print(f"[DEBUG]   - input_file: {input_file}")
+        print(f"[DEBUG]   - output_dir: {output_dir}")
+        print(f"[DEBUG]   - model: {model}")
+        print(f"[DEBUG]   - temperature: {temperature}")
+        
+        # Check if input file exists
+        if not os.path.exists(input_file):
+            print(f"[DEBUG] ERROR: Input file not found: {input_file}")
+            raise HTTPException(
+                status_code=404, 
+                detail=f"Reviewed transcripts file not found. Please review the content first."
+            )
+        
+        print(f"[DEBUG] Input file found: {input_file}")
+        print(f"[DEBUG] Starting MoM generation with crewAgent2...")
+        
+        # Call crewAgent2.main to generate MoM and action items
+        try:
+            start_time = time.time()
+            crewAgent2_main(
+                in_path=input_file,
+                out_dir=output_dir,
+                model=model,
+                temperature=temperature,
+                output_format=output_format
+            )
+            end_time = time.time()
+            exec_time = end_time - start_time
+            minutes = int(exec_time // 60)
+            seconds = int(exec_time % 60)
+            print(f"[DEBUG] MoM generation completed successfully")
+            print(f"[DEBUG] Process execution time: {minutes} min {seconds} sec")
+        except Exception as e:
+            print(f"[DEBUG] Error in MoM generation: {e}")
+            print(f"[DEBUG] Error type: {type(e).__name__}")
+            import traceback
+            print(f"[DEBUG] Full traceback: {traceback.format_exc()}")
+            raise HTTPException(status_code=500, detail=f"Error generating MoM: {str(e)}")
+        
+        # Prepare response with file paths
+        response_data = {
+            "meeting_id": current_meeting_id,
+            "status": "success",
+            "message": "Minutes of Meeting and Action Items generated successfully",
+            "execution_time": f"{minutes} min {seconds} sec",
+            "files_generated": []
+        }
+        
+        # Check for generated files and add to response
+        mom_md_path = os.path.join(output_dir, "minutes_of_meeting.md")
+        mom_json_path = os.path.join(output_dir, "minutes_of_meeting.json")
+        action_items_path = os.path.join(output_dir, "action_items.json")
+        
+        if os.path.exists(mom_md_path):
+            print(f"[DEBUG] Found: {mom_md_path}")
+            response_data["files_generated"].append({
+                "type": "minutes_markdown",
+                "path": mom_md_path,
+                "size": os.path.getsize(mom_md_path)
+            })
+        
+        if os.path.exists(mom_json_path):
+            print(f"[DEBUG] Found: {mom_json_path}")
+            response_data["files_generated"].append({
+                "type": "minutes_json",
+                "path": mom_json_path,
+                "size": os.path.getsize(mom_json_path)
+            })
+        
+        # Read and include action items in response
+        if os.path.exists(action_items_path):
+            print(f"[DEBUG] Found: {action_items_path}")
+            try:
+                with open(action_items_path, 'r', encoding='utf-8') as f:
+                    action_items_data = json.load(f)
+                
+                response_data["files_generated"].append({
+                    "type": "action_items_json",
+                    "path": action_items_path,
+                    "size": os.path.getsize(action_items_path)
+                })
+                
+                response_data["action_items"] = action_items_data
+                response_data["action_items_count"] = action_items_data.get("total_items", 0)
+                
+                print(f"[DEBUG] Action items loaded: {response_data['action_items_count']} items")
+            except Exception as e:
+                print(f"[DEBUG] Error reading action items: {e}")
+                response_data["action_items_error"] = str(e)
+        
+        # Read MoM content to include in response (optional, for preview)
+        if os.path.exists(mom_md_path):
+            try:
+                with open(mom_md_path, 'r', encoding='utf-8') as f:
+                    mom_content = f.read()
+                response_data["mom_preview"] = mom_content[:500] + "..." if len(mom_content) > 500 else mom_content
+            except Exception as e:
+                print(f"[DEBUG] Error reading MoM preview: {e}")
+        
+        print(f"[DEBUG] === MoM generation completed successfully ===")
+        print(f"[DEBUG] Generated {len(response_data['files_generated'])} files")
+        
+        return JSONResponse(content=response_data)
+        
+    except HTTPException:
+        # Re-raise HTTP exceptions
+        print(f"[DEBUG] Re-raising HTTP exception")
+        raise
+    except Exception as e:
+        print(f"[DEBUG] === UNEXPECTED ERROR ===")
+        print(f"[DEBUG] Error type: {type(e).__name__}")
+        print(f"[DEBUG] Error message: {str(e)}")
+        import traceback
+        print(f"[DEBUG] Full traceback: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
+
+
+@app.post("/api/review_and_assign_action_items")
+async def review_and_assign_action_items(
+    action_items_reviewed: str = Form(...)  # JSON string, parse in backend
+):
+    """
+    Review and assign action items after MoM generation.
+    Allows users to modify action item details (owner, due date, priority, etc.)
+    before finalizing them.
+    
+    Args:
+        action_items_reviewed: JSON string containing reviewed action items
+        
+    Returns:
+        The reviewed and updated action items
+    """
+    global next_id
+    
+    print(f"[DEBUG] === Starting review_and_assign_action_items ===")
+    
+    try:
+        # Parse the JSON string
+        print(f"[DEBUG] Parsing action_items_reviewed JSON...")
+        try:
+            action_items_reviewed = json.loads(action_items_reviewed)
+            print(f"[DEBUG] Successfully parsed action items")
+        except json.JSONDecodeError as e:
+            print(f"[DEBUG] JSON decode error: {e}")
+            raise HTTPException(status_code=422, detail=f"Invalid JSON format: {str(e)}")
+        
+        # Get the original action items for comparison
+        output_dir = "outputs"
+        original_path = os.path.join(output_dir, "action_items.json")
+        
+        if os.path.exists(original_path):
+            print(f"[DEBUG] Loading original action items from {original_path}")
+            try:
+                with open(original_path, 'r', encoding='utf-8') as f:
+                    original_data = json.load(f)
+                print(f"[DEBUG] Original action items loaded successfully")
+            except Exception as e:
+                print(f"[DEBUG] Warning: Could not load original action items: {e}")
+                original_data = None
+        else:
+            print(f"[DEBUG] No original action items file found")
+            original_data = None
+        
+        # Process and flag changes
+        result = compare_and_flag_action_item_changes(action_items_reviewed, original_data)
+        
+        # Create the updated structure
+        updated_action_items = {
+            "meeting_id": next_id,
+            "reviewed_at": __import__('datetime').datetime.now().isoformat(),
+            "total_items": len(result) if isinstance(result, list) else result.get("total_items", 0),
+            "action_items": result if isinstance(result, list) else result.get("action_items", [])
+        }
+        
+        # If the original data had additional metadata, preserve it
+        if original_data and isinstance(original_data, dict):
+            if "meeting_date" in original_data:
+                updated_action_items["meeting_date"] = original_data["meeting_date"]
+            if "generated_at" in original_data:
+                updated_action_items["generated_at"] = original_data["generated_at"]
+        
+        # Save to reviewed_action_items.json
+        reviewed_path = os.path.join(output_dir, "reviewed_action_items.json")
+        print(f"[DEBUG] Saving reviewed action items to {reviewed_path}")
+        
+        with open(reviewed_path, "w", encoding="utf-8") as f:
+            json.dump(updated_action_items, f, indent=2, ensure_ascii=False)
+        
+        print(f"[DEBUG] Reviewed action items saved successfully")
+        print(f"[DEBUG] Total items: {updated_action_items['total_items']}")
+        
+        # Return the action items array for display
+        return JSONResponse(content=updated_action_items["action_items"])
+        
+    except HTTPException:
+        print(f"[DEBUG] Re-raising HTTP exception")
+        raise
+    except Exception as e:
+        print(f"[DEBUG] === UNEXPECTED ERROR ===")
+        print(f"[DEBUG] Error type: {type(e).__name__}")
+        print(f"[DEBUG] Error message: {str(e)}")
+        import traceback
+        print(f"[DEBUG] Full traceback: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
+
+
+def compare_and_flag_action_item_changes(reviewed_items, original_data):
+    """
+    Compare reviewed action items with original items and flag changes.
+    
+    Args:
+        reviewed_items: List of reviewed action items or dict with action_items key
+        original_data: Original action items data (dict or None)
+        
+    Returns:
+        List of action items with change flags added
+    """
+    # Extract the action items list from input
+    if isinstance(reviewed_items, dict) and "action_items" in reviewed_items:
+        reviewed_list = reviewed_items["action_items"]
+    elif isinstance(reviewed_items, list):
+        reviewed_list = reviewed_items
+    else:
+        print(f"[DEBUG] Warning: Unexpected reviewed_items format")
+        return reviewed_items
+    
+    # Extract original action items list
+    original_list = []
+    if original_data:
+        if isinstance(original_data, dict) and "action_items" in original_data:
+            original_list = original_data["action_items"]
+        elif isinstance(original_data, list):
+            original_list = original_data
+    
+    # If no original data, return reviewed items as-is
+    if not original_list:
+        print(f"[DEBUG] No original items for comparison")
+        return reviewed_list
+    
+    # Compare and flag changes
+    print(f"[DEBUG] Comparing {len(reviewed_list)} reviewed items with {len(original_list)} original items")
+    
+    for idx, reviewed_item in enumerate(reviewed_list):
+        # Find matching original item by ID or index
+        original_item = None
+        
+        # Try to match by ID first
+        if "id" in reviewed_item:
+            reviewed_id = reviewed_item["id"]
+            original_item = next((item for item in original_list if item.get("id") == reviewed_id), None)
+        
+        # Fall back to index matching
+        if not original_item and idx < len(original_list):
+            original_item = original_list[idx]
+        
+        if not original_item:
+            # New item added during review
+            reviewed_item["change_type"] = "added"
+            continue
+        
+        # Compare fields and track changes
+        changes = []
+        
+        # Check description
+        if reviewed_item.get("description") != original_item.get("description"):
+            changes.append("description")
+            reviewed_item["old_description"] = original_item.get("description")
+        
+        # Check owner
+        reviewed_owner = reviewed_item.get("owner", {})
+        original_owner = original_item.get("owner", {})
+        if isinstance(reviewed_owner, dict) and isinstance(original_owner, dict):
+            if (reviewed_owner.get("name") != original_owner.get("name") or 
+                reviewed_owner.get("email") != original_owner.get("email")):
+                changes.append("owner")
+                reviewed_item["old_owner"] = original_owner
+        elif reviewed_owner != original_owner:
+            changes.append("owner")
+            reviewed_item["old_owner"] = original_owner
+        
+        # Check due date
+        if reviewed_item.get("due_date") != original_item.get("due_date"):
+            changes.append("due_date")
+            reviewed_item["old_due_date"] = original_item.get("due_date")
+        
+        # Check priority
+        if reviewed_item.get("priority") != original_item.get("priority"):
+            changes.append("priority")
+            reviewed_item["old_priority"] = original_item.get("priority")
+        
+        # Check status
+        if reviewed_item.get("status") != original_item.get("status"):
+            changes.append("status")
+            reviewed_item["old_status"] = original_item.get("status")
+        
+        # Check tags
+        reviewed_tags = set(reviewed_item.get("tags", []))
+        original_tags = set(original_item.get("tags", []))
+        if reviewed_tags != original_tags:
+            changes.append("tags")
+            reviewed_item["old_tags"] = list(original_tags)
+        
+        # Add change tracking
+        if changes:
+            reviewed_item["change_type"] = "modified"
+            reviewed_item["fields_changed"] = changes
+            print(f"[DEBUG] Item {idx}: Modified fields: {', '.join(changes)}")
+        else:
+            reviewed_item["change_type"] = "unchanged"
+    
+    return reviewed_list
+
 
 @app.get("/health")
 def health():

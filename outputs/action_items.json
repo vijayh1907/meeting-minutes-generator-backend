@@ -1,0 +1,63 @@
+{
+  "meeting_date": "November 1, 2025",
+  "generated_at": "2025-11-01T20:27:08.923557",
+  "total_items": 4,
+  "action_items": [
+    {
+      "id": "action_001",
+      "description": "Share the agenda for today's sprint review",
+      "owner": {
+        "name": "Not specified",
+        "email": null
+      },
+      "due_date": "Not specified",
+      "due_date_calculated": null,
+      "status": "pending",
+      "created_from_meeting": "November 1, 2025",
+      "priority": "medium",
+      "tags": []
+    },
+    {
+      "id": "action_002",
+      "description": "Adjust settings as needed",
+      "owner": {
+        "name": "Not specified",
+        "email": null
+      },
+      "due_date": "Not specified",
+      "due_date_calculated": null,
+      "status": "pending",
+      "created_from_meeting": "November 1, 2025",
+      "priority": "medium",
+      "tags": []
+    },
+    {
+      "id": "action_003",
+      "description": "Prepare the draft for review by Wednesday",
+      "owner": {
+        "name": "Not specified",
+        "email": null
+      },
+      "due_date": "Wednesday, (03-11-2025)",
+      "due_date_calculated": "03-11-2025",
+      "status": "pending",
+      "created_from_meeting": "November 1, 2025",
+      "priority": "medium",
+      "tags": []
+    },
+    {
+      "id": "action_004",
+      "description": "Send out the calendar invite",
+      "owner": {
+        "name": "Not specified",
+        "email": null
+      },
+      "due_date": "Not specified",
+      "due_date_calculated": null,
+      "status": "pending",
+      "created_from_meeting": "November 1, 2025",
+      "priority": "medium",
+      "tags": []
+    }
+  ]
+}

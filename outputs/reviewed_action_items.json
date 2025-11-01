@@ -1,0 +1,85 @@
+{
+  "meeting_id": null,
+  "reviewed_at": "2025-11-01T20:38:44.668844",
+  "total_items": 3,
+  "action_items": [
+    {
+      "id": "action_001",
+      "description": "Share the agenda for today's sprint review.",
+      "owner": {
+        "name": "soumya paul",
+        "email": "Soumyapaul22@gmail.com"
+      },
+      "due_date": "Not specified",
+      "due_date_calculated": null,
+      "status": "pending",
+      "created_from_meeting": "August 26, 2025",
+      "priority": "medium",
+      "tags": [],
+      "old_description": "Share the agenda for today's sprint review",
+      "old_owner": {
+        "name": "Not specified",
+        "email": null
+      },
+      "change_type": "modified",
+      "fields_changed": [
+        "description",
+        "owner"
+      ]
+    },
+    {
+      "id": "action_002",
+      "description": "Prepare the draft for review by Wednesday.",
+      "owner": {
+        "name": "soumya paul",
+        "email": "Soumyapaul22@gmail.com"
+      },
+      "due_date": "Wednesday, (27-08-2025)",
+      "due_date_calculated": "27-08-2025",
+      "status": "pending",
+      "created_from_meeting": "August 26, 2025",
+      "priority": "medium",
+      "tags": [],
+      "old_description": "Adjust settings as needed",
+      "old_owner": {
+        "name": "Not specified",
+        "email": null
+      },
+      "old_due_date": "Not specified",
+      "change_type": "modified",
+      "fields_changed": [
+        "description",
+        "owner",
+        "due_date"
+      ]
+    },
+    {
+      "id": "action_003",
+      "description": "Send out the calendar invite for the next meeting.",
+      "owner": {
+        "name": "soumya paul",
+        "email": "Soumyapaul22@gmail.com"
+      },
+      "due_date": "Not specified",
+      "due_date_calculated": null,
+      "status": "pending",
+      "created_from_meeting": "August 26, 2025",
+      "priority": "medium",
+      "tags": [],
+      "old_description": "Prepare the draft for review by Wednesday",
+      "old_owner": {
+        "name": "Not specified",
+        "email": null
+      },
+      "old_due_date": "Wednesday, (03-11-2025)",
+      "change_type": "modified",
+      "fields_changed": [
+        "description",
+        "owner",
+        "due_date"
+      ]
+    }
+  ],
+  "meeting_date": "November 1, 2025",
+  "generated_at": "2025-11-01T20:27:08.923557"
+}
