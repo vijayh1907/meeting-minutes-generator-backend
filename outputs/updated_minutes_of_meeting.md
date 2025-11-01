@@ -16,9 +16,9 @@ The Financial Forecasting Team convened to review the Q3 forecasting model perfo
 - **Sentiment Analysis:** The team is experimenting with sentiment analysis, which has shown promising early results, particularly in fashion and electronics.
 
 ## Action Items
-- **Share the agenda for today's sprint review.** - Owner: Soumya Paul (soumyapaul22@gmail.com) - Due: Monday - Priority: Medium - Status: Pending
+- **Share the agenda for today's sprint review.** - Owner: Soumya Paul (soumyapaul22@gmail.com) - Due: Monday, (03-11-2025) - Priority: Medium - Status: Pending
 - **Prepare the draft for review by Wednesday.** - Owner: Vijay Hudge (vijayhudge89@gmail.com) - Due: Wednesday, (05-11-2025) - Priority: Medium - Status: Pending
-- **Send out the calendar invite.** - Owner: Vijay Hudge (vijayhudge89@gmail.com) - Due: Friday - Priority: Medium - Status: Pending
+- **Send out the calendar invite.** - Owner: Vijay Hudge (vijayhudge89@gmail.com) - Due: Friday, (07-11-2025) - Priority: Medium - Status: Pending
 
 ## Decisions Made
 - The team decided to incorporate supply chain risk factors into holiday forecasting models.

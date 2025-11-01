@@ -112,4 +112,4 @@ if __name__ == "__main__":
     ap.add_argument("--temperature", type=float, default=0.1)
     args = ap.parse_args()
     main(args.input, args.out, args.model, args.temperature)
-    # python crew.py --input call_transcript.txt --out outputs
+    # python crewAgent1.py --input call_transcript.txt --out outputs
