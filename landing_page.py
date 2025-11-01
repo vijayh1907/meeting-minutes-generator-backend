@@ -3,6 +3,7 @@ import json
 import time
 from crewAgent1 import main as crewAgent1_main
 from crewAgent2 import main as crewAgent2_main
+from crewAgent3 import main as crewAgent3_main
 from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.responses import JSONResponse
@@ -684,6 +685,88 @@ def compare_and_flag_action_item_changes(reviewed_items, original_data):
     
     return reviewed_list
 
+@app.post("/api/update_mom")
+def update_mom():
+    """
+    API to merge reviewed action items with MoM and return the updated content.
+    Runs crewAgent3.py to generate updated_minutes_of_meeting.md
+    """
+    print("[DEBUG] === Starting update_mom API ===")
+    
+    try:
+        output_dir = "outputs"
+        mom_path = os.path.join(output_dir, "minutes_of_meeting.md")
+        action_items_path = os.path.join(output_dir, "reviewed_action_items.json")
+        updated_mom_path = os.path.join(output_dir, "updated_minutes_of_meeting.md")
+        
+        # Validate input files exist
+        if not os.path.exists(mom_path):
+            print(f"[DEBUG] MoM file not found: {mom_path}")
+            raise HTTPException(status_code=404, detail=f"minutes_of_meeting.md not found. Please generate MoM first.")
+        
+        if not os.path.exists(action_items_path):
+            print(f"[DEBUG] Reviewed action items not found: {action_items_path}")
+            raise HTTPException(status_code=404, detail=f"reviewed_action_items.json not found. Please review action items first.")
+        
+        print(f"[DEBUG] Input files validated")
+        print(f"[DEBUG] MoM path: {mom_path}")
+        print(f"[DEBUG] Action items path: {action_items_path}")
+        
+        # Import and run crewAgent3
+        print(f"[DEBUG] Running crewAgent3 to merge action items...")
+        from crewAgent3 import main as crewAgent3_main
+        
+        # Run crewAgent3 with no-backup option
+        crewAgent3_main(
+            mom_path=mom_path,
+            action_items_path=action_items_path,
+            out_dir=output_dir,
+            model="openai/gpt-4o-mini",
+            temperature=0.2,
+            backup=False
+        )
+        
+        print(f"[DEBUG] crewAgent3 execution completed")
+        
+        # Check if updated MoM was created
+        if not os.path.exists(updated_mom_path):
+            print(f"[DEBUG] Updated MoM not created: {updated_mom_path}")
+            raise HTTPException(status_code=500, detail="Failed to create updated MoM")
+        
+        # Read the updated MoM content
+        print(f"[DEBUG] Reading updated MoM from {updated_mom_path}")
+        with open(updated_mom_path, 'r', encoding='utf-8') as f:
+            updated_mom_content = f.read()
+        
+        print(f"[DEBUG] Updated MoM read successfully, size: {len(updated_mom_content)} chars")
+        
+        # Also read the reviewed action items to return them
+        with open(action_items_path, 'r', encoding='utf-8') as f:
+            reviewed_action_items = json.load(f)
+        
+        # Return the updated MoM content and action items
+        response_data = {
+            "status": "success",
+            "message": "MoM updated successfully with reviewed action items",
+            "updated_mom_content": updated_mom_content,
+            "action_items": reviewed_action_items.get("action_items", []),
+            "total_action_items": reviewed_action_items.get("total_items", 0),
+            "updated_at": datetime.now().isoformat()
+        }
+        
+        print(f"[DEBUG] Returning response with {response_data['total_action_items']} action items")
+        return JSONResponse(content=response_data)
+        
+    except HTTPException:
+        print(f"[DEBUG] Re-raising HTTP exception")
+        raise
+    except Exception as e:
+        print(f"[DEBUG] === ERROR in update_mom ===")
+        print(f"[DEBUG] Error type: {type(e).__name__}")
+        print(f"[DEBUG] Error message: {str(e)}")
+        import traceback
+        print(f"[DEBUG] Full traceback: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=f"Error updating MoM: {str(e)}")
 
 @app.get("/health")
 def health():
