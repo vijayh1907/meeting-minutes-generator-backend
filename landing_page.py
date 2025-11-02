@@ -289,6 +289,9 @@ async def upload_meeting_files(
         try:
             print(f"[DEBUG] Reading transcripts from: {file_path}")
             mom = read_participants_from_json(filename=file_path)
+            # append meeting_id or next_id
+            mom.append({'meeting_id': next_id, 'confidence' : 1.0 , 'category' : 'pointer','needs_review':'false' , 'notes' : 'meeting id' , 'raw_transcript_line': 'meeting id', 'tags' : ''})  # Dummy confidence for meeting_id entry
+            mom.append({'next_id': next_id, 'confidence' : 1.0 , 'category' : 'pointer','needs_review':'false' , 'notes' : 'meeting id' , 'raw_transcript_line': 'meeting id', 'tags' : ''})  # Dummy confidence for meeting_id entry
             print(f"[DEBUG] Transcripts read successfully, count: {len(mom) if mom else 0}")
         except Exception as e:
             print(f"[DEBUG] Error reading transcripts: {e}")
@@ -297,6 +300,7 @@ async def upload_meeting_files(
         # Process confidence scores
         print(f"[DEBUG] Processing confidence scores...")
         for item in mom:
+
             if item['confidence'] <= 0.8 :
                 item['needs_review'] = True
             else:
@@ -318,23 +322,157 @@ async def upload_meeting_files(
         raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}") 
 
 
+def process_mom_and_action_items(meeting_id=None, output_format="markdown"):
+    """
+    Helper function to generate MoM and Action Items from reviewed transcripts.
+    Can be called from endpoints or other functions.
+    """
+    global next_id
+    
+    print(f"[DEBUG] === Starting process_mom_and_action_items ===")
+    print(f"[DEBUG]   - meeting_id: {meeting_id or next_id}")
+    print(f"[DEBUG]   - output_format: {output_format}")
+    
+    try:
+        current_meeting_id = meeting_id or next_id
+        if not current_meeting_id:
+            raise HTTPException(status_code=400, detail="Meeting ID not found.")
+        
+        # Define paths
+        input_file = "outputs/reviewed_transcripts.json"
+        output_dir = "outputs"
+        model = "openai/gpt-4o-mini"
+        temperature = 0.2
+        
+        # Check if input file exists
+        if not os.path.exists(input_file):
+            raise HTTPException(
+                status_code=404, 
+                detail=f"Reviewed transcripts file not found at {input_file}"
+            )
+        
+        print(f"[DEBUG] Starting MoM generation with crewAgent2...")
+        
+        # Call crewAgent2.main
+        start_time = time.time()
+        crewAgent2_main(
+            in_path=input_file,
+            out_dir=output_dir,
+            model=model,
+            temperature=temperature,
+            output_format=output_format
+        )
+        end_time = time.time()
+        exec_time = end_time - start_time
+        minutes = int(exec_time // 60)
+        seconds = int(exec_time % 60)
+        print(f"[DEBUG] MoM generation completed in {minutes} min {seconds} sec")
+        
+        # Prepare response data
+        response_data = {
+            "meeting_id": current_meeting_id,
+            "status": "success",
+            "message": "MoM and Action Items generated successfully",
+            "execution_time": f"{minutes} min {seconds} sec",
+            "files_generated": []
+        }
+        
+        # Check for generated files
+        mom_md_path = os.path.join(output_dir, "minutes_of_meeting.md")
+        mom_json_path = os.path.join(output_dir, "minutes_of_meeting.json")
+        action_items_path = os.path.join(output_dir, "action_items.json")
+        
+        if os.path.exists(mom_md_path):
+            response_data["files_generated"].append({
+                "type": "minutes_markdown",
+                "path": mom_md_path,
+                "size": os.path.getsize(mom_md_path)
+            })
+        
+        if os.path.exists(mom_json_path):
+            response_data["files_generated"].append({
+                "type": "minutes_json",
+                "path": mom_json_path,
+                "size": os.path.getsize(mom_json_path)
+            })
+        
+        # Read and include action items
+        if os.path.exists(action_items_path):
+            with open(action_items_path, 'r', encoding='utf-8') as f:
+                action_items_data = json.load(f)
+            
+            response_data["files_generated"].append({
+                "type": "action_items_json",
+                "path": action_items_path,
+                "size": os.path.getsize(action_items_path)
+            })
+            
+            response_data["action_items"] = action_items_data
+            response_data["action_items_count"] = action_items_data.get("total_items", 0)
+        
+        print(f"[DEBUG] === MoM generation completed successfully ===")
+        return response_data
+        
+    except Exception as e:
+        print(f"[DEBUG] Error in process_mom_and_action_items: {e}")
+        import traceback
+        print(f"[DEBUG] Full traceback: {traceback.format_exc()}")
+        raise
+
+
 @app.post("/review_content_classify")
 async def review_content(
-    transcripts_reviewed: str = Form(...)  # JSON string, parse in backend
+    transcripts_reviewed: str = Form(...)
+    # , next_id: str = Form(...)  # Add meeting_id parameter
 ):
-    transcripts_reviewed = json.loads(transcripts_reviewed) 
-    result = compare_and_flag_category_changes(transcripts_reviewed)
-    # Storing the result in reviewed_transcripts.json file with meeting_id key and value from meet_data.json 
-    # and transcripts as another key with value as received_data  
-    updated_transcripts = {}
-    updated_transcripts['meeting_id'] = next_id
-    updated_transcripts['transcripts'] = result
-    output_dir = "outputs"
-    reviewed_path = os.path.join(output_dir, "reviewed_transcripts.json")
-    with open(reviewed_path,"w",encoding="utf-8" )as f:
-        json.dump(updated_transcripts,f,indent=2)
-    print(f"Reviewed transcripts saved to {reviewed_path}")
-    return result
+    """Review content and automatically generate MoM and action items"""
+    global next_id
+    try:
+        transcripts_reviewed = json.loads(transcripts_reviewed) 
+        if next_id is None:
+            for item in transcripts_reviewed:
+                if 'meeting_id' in item:
+                    next_id = int(item['meeting_id'])
+                    break
+        print(f"[DEBUG] Starting review_content for meeting_id: {next_id}")
+        result = compare_and_flag_category_changes(transcripts_reviewed)
+
+        # Store reviewed transcripts
+        updated_transcripts = {
+            'meeting_id': next_id,
+            'transcripts': result
+        }
+        output_dir = "outputs"
+        reviewed_path = os.path.join(output_dir, "reviewed_transcripts.json")
+        
+        with open(reviewed_path, "w", encoding="utf-8") as f:
+            json.dump(updated_transcripts, f, indent=2)
+        
+        print(f"[DEBUG] Reviewed transcripts saved to {reviewed_path}")
+        
+        # Now call the helper function to generate MoM and action items
+        print(f"[DEBUG] Calling process_mom_and_action_items...")
+        mom_response = process_mom_and_action_items(
+            meeting_id=next_id,
+            output_format="markdown"
+        )
+        
+        print(f"[DEBUG] MoM generation completed")
+        print(f"[DEBUG] Files generated: {len(mom_response.get('files_generated', []))}")
+        
+        # Return both the reviewed transcripts and MoM generation status
+        return JSONResponse(content={
+            "reviewed_transcripts": result,
+            "identified_action_items": mom_response
+        })
+        
+    except Exception as e:
+        print(f"[DEBUG] Error in review_content: {e}")
+        import traceback
+        print(f"[DEBUG] Full traceback: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
+
+
 
 
 @app.post("/api/create_mom_and_action_items")
@@ -555,7 +693,9 @@ async def review_and_assign_action_items(
                 updated_action_items["generated_at"] = original_data["generated_at"]
         
         # Save to reviewed_action_items.json
-        reviewed_path = os.path.join(output_dir, "reviewed_action_items.json")
+        # reviewed_path = os.path.join(output_dir, "reviewed_action_items.json")
+        # over write the action_items.json file with reviewed items
+        reviewed_path = os.path.join(output_dir, "action_items.json")
         print(f"[DEBUG] Saving reviewed action items to {reviewed_path}")
         
         with open(reviewed_path, "w", encoding="utf-8") as f:
@@ -696,8 +836,8 @@ def update_mom():
     try:
         output_dir = "outputs"
         mom_path = os.path.join(output_dir, "minutes_of_meeting.md")
-        action_items_path = os.path.join(output_dir, "reviewed_action_items.json")
-        updated_mom_path = os.path.join(output_dir, "updated_minutes_of_meeting.md")
+        action_items_path = os.path.join(output_dir, "action_items.json")
+        updated_mom_path = os.path.join(output_dir, "minutes_of_meeting.md")
         
         # Validate input files exist
         if not os.path.exists(mom_path):
@@ -706,7 +846,7 @@ def update_mom():
         
         if not os.path.exists(action_items_path):
             print(f"[DEBUG] Reviewed action items not found: {action_items_path}")
-            raise HTTPException(status_code=404, detail=f"reviewed_action_items.json not found. Please review action items first.")
+            raise HTTPException(status_code=404, detail=f"action_items.json not found. Please review action items first.")
         
         print(f"[DEBUG] Input files validated")
         print(f"[DEBUG] MoM path: {mom_path}")

@@ -1,132 +1,132 @@
 raw_transcript_line,category,tags,confidence,notes
-# Financial Forecasting Team Meeting Transcript,Discussion,"transcript, meeting",0.9,Title of the meeting.
-"**Date:** November 1, 2025",Discussion,"date, meeting",0.9,Date of the meeting.
-**Time:** 10:00 AM - 11:30 AM,Discussion,"time, meeting",0.9,Time of the meeting.
-**Team:** Retail Financial Forecasting,Discussion,"team, meeting",0.9,Team involved in the meeting.
-**Participants:** 8 team members,Discussion,"participants, meeting",0.9,Number of participants in the meeting.
----,Discussion,separator,0.1,Separator line.
-"**[00:00:05]** Good morning everyone, let's get started. Can everyone see my screen?",Discussion,"greeting, screen sharing",0.8,Opening statement and checking screen visibility.
-"**[00:00:12]** Yes, looking good. Are we recording this session?",Question,"recording, session",0.9,Question about recording the session.
-"**[00:00:18]** Sorry, am I audible? My headset was acting up this morning.",Question,"audio, headset",0.8,Participant checking audio.
-**[00:00:25]** We can hear you fine. Yes please record if possible.,Discussion,"audio, recording",0.8,Response confirming audio and agreeing to record.
-"**[00:00:32]** Hold on, I'm having WiFi issues. Give me just a second to reconnect.",Action,"WiFi, reconnect",0.7,Participant addressing WiFi issues.
-"**[00:00:40]** No problem. While we wait, let me share the agenda for today's sprint review.",Action,"agenda, sprint review",0.8,Action to share the agenda.
-**[00:00:48]** Can you make the screen a bit larger? The font is quite small on my end.,Question,"screen, font size",0.9,Request to adjust screen size.
-"**[00:00:55]** Same here, maybe zoom in a bit?",Question,"screen, zoom",0.9,Another request to adjust screen size.
-**[00:01:02]** Better now? I've increased it to 120%.,Discussion,"screen, adjustment",0.8,Confirmation of screen adjustment.
-"**[00:01:08]** Perfect, thanks. Are you back with us?",Question,"audio, check-in",0.9,Checking if participant is back.
-"**[00:01:14]** Yes, sorry about that. My home router decided to restart itself apparently.",Discussion,"WiFi, router",0.8,Participant explaining WiFi issue.
-"**[00:01:22]** *coughing* Sorry, excuse me. So today we're reviewing our Q3 forecasting model performance.",Discussion,"review, forecasting",0.8,Introduction to the main topic of the meeting.
-"**[00:01:31]** Before we dive in, our accuracy improved by 12% since last sprint.",Discussion,"accuracy, improvement",0.9,Discussion on accuracy improvement.
-**[00:01:38]** That's fantastic! What drove the improvement?,Question,"improvement, discussion",0.9,Question about the reason for improvement.
-**[00:01:44]** Mainly the new feature engineering we implemented for seasonal patterns.,Discussion,"feature engineering, seasonal patterns",0.9,Explanation of the reason for improvement.
-**[00:01:52]** Can you hear that echo? I think someone's not on mute.,Question,"audio, echo",0.9,Question about audio echo.
-"**[00:01:58]** Sorry, that was me. I'm muted now.",Discussion,"audio, mute",0.9,Participant addressing echo issue.
-**[00:02:04]** Great. So the seasonal patterns - were these specific to retail categories?,Question,"seasonal patterns, retail",0.9,Question about seasonal patterns.
-"**[00:02:12]** Yes, we segmented by apparel, electronics, and home goods separately.",Discussion,"segmentation, categories",0.9,Discussion on segmentation of categories.
-"**[00:02:19]** *phone ringing in background* Sorry, let me just silence this.",Action,"background noise, silence",0.5,Participant addressing background noise.
-"**[00:02:26]** Electronics showed the most volatile patterns, especially during back-to-school season.",Discussion,"electronics, volatile patterns",0.9,Discussion on electronics patterns.
-**[00:02:34]** That makes sense. What about the holiday forecasting? That's our main focus now.,Question,"holiday forecasting, focus",0.9,Question about holiday forecasting.
-"**[00:02:42]** Right, so we're looking at Black Friday through New Year's predictions.",Discussion,"holiday, predictions",0.9,Discussion on holiday predictions.
-**[00:02:49]** Are we factoring in the supply chain disruptions from last year?,Question,"supply chain, disruptions",0.9,Question about supply chain disruptions.
-**[00:02:56]** Good point. We've incorporated those learnings into our risk models.,Discussion,"risk models, incorporation",0.9,Discussion on incorporating learnings.
-"**[00:03:03]** Sorry, can you repeat that? My audio cut out for a second.",Question,"audio, repeat",0.9,Request to repeat information.
-**[00:03:10]** We've incorporated supply chain risk factors into our holiday models.,Discussion,"supply chain, holiday models",0.9,Discussion on supply chain risk factors.
-**[00:03:17]** Perfect. What's our confidence level on these forecasts?,Question,"confidence level, forecasts",0.9,Question about confidence level.
-**[00:03:24]** We're sitting at about 85% accuracy for the main holiday period.,Discussion,"accuracy, holiday period",0.9,Discussion on accuracy level.
-"**[00:03:31]** *typing sounds* Sorry, just taking notes. That's impressive given last year's volatility.",Discussion,"notes, impressive",0.8,Participant acknowledging the accuracy.
-**[00:03:39]** The challenge is the post-holiday inventory management predictions.,Discussion,"challenge, inventory management",0.9,Discussion on challenges.
-"**[00:03:46]** Oh, I think I'm getting some feedback. Can everyone check their mics?",Question,"feedback, microphone",0.9,Request to check microphones.
-**[00:03:53]** I hear it too. Let me adjust my settings.,Action,"settings, adjust",0.8,Participant addressing feedback.
-"**[00:04:00]** Better now? Okay, so inventory management - what's the main issue there?",Question,"inventory management, issue",0.9,Question about inventory management issues.
-**[00:04:08]** Return patterns have become less predictable since the policy changes.,Discussion,"return patterns, policy changes",0.9,Discussion on return patterns.
-**[00:04:15]** Are we tracking online versus in-store return behaviors separately?,Question,"tracking, returns",0.9,Question about tracking return behaviors.
-"**[00:04:22]** Yes, and the data shows completely different patterns for each channel.",Discussion,"data, patterns",0.9,Discussion on data patterns.
-"**[00:04:29]** *dog barking in background* Sorry everyone, working from home today.",Action,"background noise, home",0.5,Participant addressing background noise.
-**[00:04:36]** No worries. So different patterns - can you quantify that difference?,Question,"quantify, patterns",0.9,Question about quantifying differences.
-"**[00:04:43]** Online returns peak around January 15th, store returns are more spread out.",Discussion,"online returns, store returns",0.9,Discussion on return peaks.
-**[00:04:50]** That's a two-week delay compared to historical patterns.,Discussion,"delay, historical patterns",0.9,Discussion on delays.
-**[00:04:57]** Interesting. Is this consistent across all retail categories?,Question,"consistency, retail categories",0.9,Question about consistency.
-"**[00:05:04]** Mostly, though apparel shows even longer delays - up to three weeks.",Discussion,"apparel, delays",0.9,Discussion on apparel delays.
-"**[00:05:11]** *connection issues* Sorry, I think I froze for a moment. Did I miss anything?",Action,"connection, freeze",0.5,Participant addressing connection issues.
-**[00:05:18]** We were discussing return pattern delays. You're caught up now.,Discussion,"return patterns, update",0.9,Update on discussion.
-**[00:05:25]** Thanks. What about the demand forecasting for Q1 next year?,Question,"demand forecasting, Q1",0.9,Question about demand forecasting.
-**[00:05:32]** That's actually our biggest uncertainty right now.,Discussion,"uncertainty, forecasting",0.9,Discussion on uncertainty.
-"**[00:05:39]** *baby crying in background* Sorry, let me mute myself.",Action,"background noise, mute",0.5,Participant addressing background noise.
-**[00:05:46]** Post-holiday consumer spending has been harder to predict lately.,Discussion,"consumer spending, predict",0.9,Discussion on consumer spending.
-**[00:05:53]** Are we seeing any correlation with economic indicators?,Question,"correlation, economic indicators",0.9,Question about correlation.
-"**[00:06:00]** Some correlation with consumer confidence index, but it's weaker than expected.",Discussion,"correlation, consumer confidence",0.9,Discussion on correlation.
-**[00:06:07]** What about social media sentiment? Are we incorporating that data?,Question,"social media, sentiment",0.9,Question about social media sentiment.
-**[00:06:14]** We started experimenting with sentiment analysis last month.,Discussion,"sentiment analysis, experiment",0.9,Discussion on sentiment analysis.
-"**[00:06:21]** Early results are promising, especially for fashion and electronics.",Discussion,"results, fashion, electronics",0.9,Discussion on early results.
-"**[00:06:28]** *phone notification sounds* Sorry, thought I had everything silenced.",Action,"background noise, silence",0.5,Participant addressing background noise.
-**[00:06:35]** No problem. So sentiment analysis - what's the correlation strength?,Question,"sentiment analysis, correlation",0.9,Question about correlation strength.
-**[00:06:42]** We're seeing about 0.7 correlation with actual sales in the following week.,Discussion,"correlation, sales",0.9,Discussion on correlation with sales.
-**[00:06:49]** That's quite strong. Are we planning to integrate this into production models?,Question,"integration, production models",0.9,Question about integration.
-"**[00:06:56]** That's the plan for next sprint, pending some data quality improvements.",Discussion,"plan, data quality",0.9,Discussion on plans for integration.
-**[00:07:03]** What kind of quality issues are we seeing?,Question,"quality issues, data",0.9,Question about quality issues.
-**[00:07:10]** Mainly noise from bot accounts and sponsored content skewing the sentiment.,Discussion,"noise, bot accounts",0.9,Discussion on quality issues.
-**[00:07:17]** *clearing throat* Excuse me. Have we considered using verified accounts only?,Question,"verified accounts, consideration",0.9,Question about using verified accounts.
-**[00:07:24]** We tried that but the sample size became too small for reliable predictions.,Discussion,"sample size, predictions",0.9,Discussion on sample size.
-**[00:07:31]** What about weighting by follower count or engagement rates?,Question,"weighting, follower count",0.9,Question about weighting.
-**[00:07:38]** That's actually what we're testing now. Results look promising.,Discussion,"testing, results",0.9,Discussion on testing results.
-**[00:07:45]** Great. Let's talk about the technical infrastructure for a moment.,Discussion,technical infrastructure,0.9,Transition to discussing technical infrastructure.
-"**[00:07:52]** *coffee cup clinking* Sorry, needed my morning caffeine fix.",Action,"background noise, coffee",0.5,Participant addressing background noise.
-**[00:07:59]** Are we still having issues with the model deployment pipeline?,Question,"model deployment, pipeline",0.9,Question about deployment issues.
-**[00:08:06]** We resolved the Docker container issues from last week.,Discussion,"Docker, issues",0.9,Discussion on resolved issues.
-**[00:08:13]** Excellent. What about the real-time data ingestion?,Question,"real-time, data ingestion",0.9,Question about data ingestion.
-**[00:08:20]** That's been stable. We're processing about 2 million transactions per hour now.,Discussion,"data ingestion, transactions",0.9,Discussion on data processing.
-"**[00:08:27]** *construction noise in background* Sorry, they're doing work next door.",Action,"background noise, construction",0.5,Participant addressing background noise.
-**[00:08:34]** No worries. So 2 million per hour - that's up from last month?,Question,"data, increase",0.9,Question about increase in transactions.
-"**[00:08:41]** Yes, about 15% increase. Holiday shopping season is starting early this year.",Discussion,"increase, holiday shopping",0.9,Discussion on increase.
-**[00:08:48]** Are our servers handling the increased load okay?,Question,"servers, load",0.9,Question about server load.
-**[00:08:55]** So far so good. We have auto-scaling configured for peak times.,Discussion,"servers, auto-scaling",0.9,Discussion on server handling.
-**[00:09:02]** What about data storage? Are we hitting any limits?,Question,"data storage, limits",0.9,Question about data storage limits.
-**[00:09:09]** We're at about 70% capacity. Should be fine through the holidays.,Discussion,"data storage, capacity",0.9,Discussion on data storage capacity.
-"**[00:09:16]** *doorbell ringing* Sorry, delivery. I'll stay muted.",Action,"background noise, delivery",0.5,Participant addressing background noise.
-**[00:09:23]** Thanks. Let's discuss the dashboard updates for stakeholders.,Discussion,"dashboard, updates",0.9,Discussion on dashboard updates.
-**[00:09:30]** The new visualizations are ready for review. Much cleaner interface.,Discussion,"visualizations, review",0.9,Discussion on visualizations.
-**[00:09:37]** Great. Are the executives happy with the real-time forecasting display?,Question,"executives, forecasting",0.9,Question about executive satisfaction.
-**[00:09:44]** They love it. Finally they can see predictions updating throughout the day.,Discussion,"executives, satisfaction",0.9,Discussion on executive feedback.
-"**[00:09:51]** *child talking in background* Sorry, kids are home today. Let me find a quieter room.",Action,"background noise, children",0.5,Participant addressing background noise.
-**[00:09:58]** No problem. So real-time updates - how often are we refreshing the models?,Question,"real-time updates, refresh",0.9,Question about model refresh frequency.
-"**[00:10:05]** Every 4 hours during business hours, every 12 hours overnight.",Discussion,"refresh frequency, business hours",0.9,Discussion on refresh frequency.
-**[00:10:12]** That frequency working well for accuracy versus computational cost?,Question,"frequency, accuracy",0.9,Question about frequency effectiveness.
-"**[00:10:19]** Yes, we found diminishing returns beyond 4-hour intervals.",Discussion,"diminishing returns, intervals",0.9,Discussion on frequency effectiveness.
-**[00:10:26]** Perfect. What about alerts for significant forecast changes?,Question,"alerts, forecast changes",0.9,Question about alerts.
-**[00:10:33]** We have thresholds set at 15% deviation from previous forecast.,Discussion,"thresholds, deviation",0.9,Discussion on alert thresholds.
-"**[00:10:40]** *connection dropping* Sorry, I think my internet is struggling again.",Action,"connection, internet",0.5,Participant addressing connection issues.
-**[00:10:47]** We can hear you fine. So 15% threshold - is that working well?,Question,"threshold, effectiveness",0.9,Question about threshold effectiveness.
-"**[10:54]** Yes, it catches the important changes without too many false alarms.",Discussion,"effectiveness, false alarms",0.9,Discussion on threshold effectiveness.
-**[00:11:01]** Excellent. Let's talk about testing strategy for the holiday models.,Discussion,"testing strategy, holiday models",0.9,Transition to testing strategy.
-**[00:11:08]** We're doing A/B testing with 10% of traffic on the new models.,Discussion,"A/B testing, traffic",0.9,Discussion on A/B testing.
-"**[00:11:15]** *keyboard typing loudly* Sorry, just updating my notes.",Action,"background noise, typing",0.5,Participant addressing background noise.
-**[00:11:22]** A/B testing - how long before we have statistical significance?,Question,"A/B testing, statistical significance",0.9,Question about statistical significance.
-**[00:11:29]** About two weeks with current traffic volumes.,Discussion,"time frame, traffic volumes",0.9,Discussion on time frame.
-**[00:11:36]** That should give us time before the major holiday push starts.,Discussion,"time frame, holiday push",0.9,Discussion on timing.
-**[00:11:43]** Exactly. We'll have results by mid-September.,Discussion,"results, timeline",0.9,Discussion on results timeline.
-**[00:11:50]** What metrics are we tracking for the A/B test?,Question,"metrics, A/B test",0.9,Question about metrics.
-"**[00:11:57]** Forecast accuracy, prediction confidence, and business impact on inventory.",Discussion,"metrics, forecast accuracy",0.9,Discussion on metrics being tracked.
-"**[00:12:04]** *fire truck sirens passing by* Sorry, emergency vehicles outside.",Action,"background noise, emergency",0.5,Participant addressing background noise.
-**[00:12:11]** No problem. Business impact - how are we measuring that?,Question,"business impact, measurement",0.9,Question about measuring business impact.
-**[00:12:18]** Primarily through stockout reduction and inventory turnover improvement.,Discussion,"measurement, stockout",0.9,Discussion on measurement methods.
-**[00:12:25]** That's perfect. Those are the KPIs leadership cares about most.,Discussion,"KPIs, leadership",0.9,Discussion on important KPIs.
-"**[00:12:32]** Speaking of leadership, they want a demo next Friday.",Discussion,"leadership, demo",0.9,Discussion on demo request.
-"**[00:12:39]** *phone buzzing* Sorry, let me silence this completely.",Action,"background noise, silence",0.5,Participant addressing background noise.
-**[00:12:46]** Demo next Friday - are we ready for that timeline?,Question,"demo, timeline",0.9,Question about readiness for demo.
-**[00:12:53]** We should be. Just need to prepare some executive-friendly visualizations.,Discussion,"preparation, visualizations",0.9,Discussion on preparation for demo.
-**[00:13:00]** I can help with that. What format do they prefer?,Question,"help, format",0.9,Offer to help with visualizations.
-**[00:13:07]** PowerBI dashboards with high-level summary metrics.,Discussion,"PowerBI, dashboards",0.9,Discussion on preferred format.
-**[00:13:14]** *coughing* Excuse me. I'll have the draft ready by Wednesday for review.,Action,"draft, review",0.5,Participant addressing coughing.
-**[00:13:21]** Perfect. Any other urgent items we need to cover today?,Question,"urgent items, discussion",0.9,Question about urgent items.
-**[00:13:28]** Just the model documentation updates for compliance.,Discussion,"documentation, compliance",0.9,Discussion on documentation updates.
-"**[00:13:35]** Right, the audit requirements. Where are we on that?",Question,"audit, requirements",0.9,Question about audit requirements.
-**[00:13:42]** About 80% complete. Should be finished by end of week.,Discussion,"completion, timeline",0.9,Discussion on completion status.
-"**[00:13:49]** *cat meowing loudly* Sorry, my cat wants attention apparently.",Action,"background noise, cat",0.5,Participant addressing background noise.
-"**[00:13:56]** No worries! Alright team, I think we've covered everything on the agenda.",Discussion,"agenda, summary",0.9,Summary of the meeting.
-**[00:14:03]** Great meeting everyone. The progress on the holiday forecasting looks solid.,Discussion,"meeting, progress",0.9,Closing remarks on progress.
-**[00:14:10]** Thanks all. Same time next week?,Question,"next meeting, schedule",0.9,Question about next meeting.
-**[00:14:17]** Works for me. I'll send out the calendar invite.,Action,"calendar, invite",0.9,Action to send calendar invite.
-**[00:14:24]** Perfect. Have a great rest of your day everyone!,Discussion,"closing, goodbye",0.9,Closing remarks.
-"**[00:14:30]** Thanks, bye everyone!",Discussion,goodbye,0.9,Goodbye.
-**[00:14:35]** Bye! *various goodbyes overlapping*,Discussion,goodbye,0.9,Goodbyes from participants.
+# Financial Forecasting Team Meeting Transcript,Discussion,"meeting, transcript",0.9,Title of the meeting.
+"**Date:** November 1, 2025",Discussion,date,0.9,Date of the meeting.
+**Time:** 10:00 AM - 11:30 AM,Discussion,time,0.9,Time of the meeting.
+**Team:** Retail Financial Forecasting,Discussion,team,0.9,Team involved in the meeting.
+**Participants:** 8 team members,Discussion,participants,0.9,Number of participants.
+---,Discussion,,0.1,Separator line.
+"**[00:00:05]** Good morning everyone, let's get started. Can everyone see my screen?",Discussion,"greeting, start",0.8,Opening statement and checking visibility.
+"**[00:00:12]** Yes, looking good. Are we recording this session?",Question,recording,0.9,Inquiring about recording the session.
+"**[00:00:18]** Sorry, am I audible? My headset was acting up this morning.",Question,audio,0.8,Checking audio status.
+**[00:00:25]** We can hear you fine. Yes please record if possible.,Discussion,"audio, recording",0.9,Confirming audio and agreeing to record.
+"**[00:00:32]** Hold on, I'm having WiFi issues. Give me just a second to reconnect.",Action,"WiFi, reconnect",0.8,Indicating a technical issue.
+"**[00:00:40]** No problem. While we wait, let me share the agenda for today's sprint review.",Action,"agenda, sprint review",0.9,Sharing the agenda.
+**[00:00:48]** Can you make the screen a bit larger? The font is quite small on my end.,Question,"screen, font size",0.9,Requesting to adjust screen size.
+"**[00:00:55]** Same here, maybe zoom in a bit?",Question,"screen, zoom",0.9,Another request for screen adjustment.
+**[00:01:02]** Better now? I've increased it to 120%.,Discussion,"screen, adjustment",0.9,Confirming screen adjustment.
+"**[00:01:08]** Perfect, thanks. Are you back with us?",Question,audio,0.9,Checking if the participant is back.
+"**[00:01:14]** Yes, sorry about that. My home router decided to restart itself apparently.",Discussion,technical issue,0.8,Explaining the technical issue.
+"**[00:01:22]** *coughing* Sorry, excuse me. So today we're reviewing our Q3 forecasting model performance.",Discussion,"review, forecasting",0.9,Introducing the main topic of the meeting.
+"**[00:01:31]** Before we dive in, our accuracy improved by 12% since last sprint.",Discussion,"accuracy, improvement",0.9,Sharing performance improvement.
+**[00:01:38]** That's fantastic! What drove the improvement?,Question,improvement,0.9,Inquiring about the reason for improvement.
+**[00:01:44]** Mainly the new feature engineering we implemented for seasonal patterns.,Discussion,"feature engineering, seasonal patterns",0.9,Explaining the reason for improvement.
+**[00:01:52]** Can you hear that echo? I think someone's not on mute.,Question,"audio, echo",0.9,Pointing out an audio issue.
+"**[00:01:58]** Sorry, that was me. I'm muted now.",Action,"audio, mute",0.9,Acknowledging and resolving the audio issue.
+**[00:02:04]** Great. So the seasonal patterns - were these specific to retail categories?,Question,"seasonal patterns, retail",0.9,Inquiring about the specifics of seasonal patterns.
+"**[00:02:12]** Yes, we segmented by apparel, electronics, and home goods separately.",Discussion,"segmentation, categories",0.9,Explaining the segmentation.
+"**[00:02:19]** *phone ringing in background* Sorry, let me just silence this.",Action,"phone, silence",0.8,Addressing a background noise issue.
+"**[00:02:26]** Electronics showed the most volatile patterns, especially during back-to-school season.",Discussion,"electronics, volatile patterns",0.9,Discussing volatility in electronics.
+**[00:02:34]** That makes sense. What about the holiday forecasting? That's our main focus now.,Question,holiday forecasting,0.9,Shifting focus to holiday forecasting.
+"**[00:02:42]** Right, so we're looking at Black Friday through New Year's predictions.",Discussion,"holiday, predictions",0.9,Specifying the holiday forecasting period.
+**[00:02:49]** Are we factoring in the supply chain disruptions from last year?,Question,"supply chain, disruptions",0.9,Inquiring about supply chain considerations.
+**[00:02:56]** Good point. We've incorporated those learnings into our risk models.,Discussion,"risk models, supply chain",0.9,Confirming incorporation of learnings.
+"**[00:03:03]** Sorry, can you repeat that? My audio cut out for a second.",Question,audio,0.9,Requesting repetition due to audio issue.
+**[00:03:10]** We've incorporated supply chain risk factors into our holiday models.,Discussion,"supply chain, holiday models",0.9,Reiterating the incorporation of risk factors.
+**[00:03:17]** Perfect. What's our confidence level on these forecasts?,Question,"confidence, forecasts",0.9,Inquiring about confidence level.
+**[00:03:24]** We're sitting at about 85% accuracy for the main holiday period.,Discussion,"accuracy, holiday",0.9,Sharing accuracy level.
+"**[00:03:31]** *typing sounds* Sorry, just taking notes. That's impressive given last year's volatility.",Discussion,"notes, impressive",0.8,Commenting on the accuracy.
+**[00:03:39]** The challenge is the post-holiday inventory management predictions.,Discussion,"inventory management, post-holiday",0.9,Identifying a challenge.
+"**[00:03:46]** Oh, I think I'm getting some feedback. Can everyone check their mics?",Question,"feedback, audio",0.9,Requesting mic checks due to feedback.
+**[00:03:53]** I hear it too. Let me adjust my settings.,Action,"audio, settings",0.9,Taking action to resolve audio feedback.
+"**[00:04:00]** Better now? Okay, so inventory management - what's the main issue there?",Question,"inventory management, issue",0.9,Inquiring about inventory management issues.
+**[00:04:08]** Return patterns have become less predictable since the policy changes.,Discussion,"return patterns, policy changes",0.9,Discussing changes in return patterns.
+**[00:04:15]** Are we tracking online versus in-store return behaviors separately?,Question,"tracking, returns",0.9,Inquiring about tracking methods.
+"**[00:04:22]** Yes, and the data shows completely different patterns for each channel.",Discussion,"tracking, data",0.9,Confirming tracking methods.
+"**[00:04:29]** *dog barking in background* Sorry everyone, working from home today.",Action,background noise,0.8,Addressing background noise.
+**[00:04:36]** No worries. So different patterns - can you quantify that difference?,Question,"quantify, patterns",0.9,Requesting quantification of differences.
+"**[00:04:43]** Online returns peak around January 15th, store returns are more spread out.",Discussion,"returns, quantification",0.9,Providing quantification of return patterns.
+**[00:04:50]** That's a two-week delay compared to historical patterns.,Discussion,"delay, historical patterns",0.9,Discussing delays in return patterns.
+**[00:04:57]** Interesting. Is this consistent across all retail categories?,Question,"consistency, retail categories",0.9,Inquiring about consistency.
+"**[00:05:04]** Mostly, though apparel shows even longer delays - up to three weeks.",Discussion,"apparel, delays",0.9,Discussing apparel delays.
+"**[00:05:11]** *connection issues* Sorry, I think I froze for a moment. Did I miss anything?",Question,"connection, freeze",0.8,Checking if anything was missed.
+**[00:05:18]** We were discussing return pattern delays. You're caught up now.,Discussion,"return patterns, update",0.9,Updating on previous discussion.
+**[00:05:25]** Thanks. What about the demand forecasting for Q1 next year?,Question,"demand forecasting, Q1",0.9,Inquiring about future forecasting.
+**[00:05:32]** That's actually our biggest uncertainty right now.,Discussion,uncertainty,0.9,Identifying uncertainty.
+"**[00:05:39]** *baby crying in background* Sorry, let me mute myself.",Action,background noise,0.8,Addressing background noise.
+**[00:05:46]** Post-holiday consumer spending has been harder to predict lately.,Discussion,"consumer spending, prediction",0.9,Discussing prediction challenges.
+**[00:05:53]** Are we seeing any correlation with economic indicators?,Question,"correlation, economic indicators",0.9,Inquiring about correlations.
+"**[00:06:00]** Some correlation with consumer confidence index, but it's weaker than expected.",Discussion,"correlation, consumer confidence",0.9,Discussing correlation findings.
+**[00:06:07]** What about social media sentiment? Are we incorporating that data?,Question,"social media, sentiment",0.9,Inquiring about social media data.
+**[00:06:14]** We started experimenting with sentiment analysis last month.,Discussion,sentiment analysis,0.9,Discussing recent experiments.
+"**[00:06:21]** Early results are promising, especially for fashion and electronics.",Discussion,"results, fashion, electronics",0.9,Sharing positive results.
+"**[00:06:28]** *phone notification sounds* Sorry, thought I had everything silenced.",Action,background noise,0.8,Addressing background noise.
+**[00:06:35]** No problem. So sentiment analysis - what's the correlation strength?,Question,"sentiment analysis, correlation",0.9,Inquiring about correlation strength.
+**[00:06:42]** We're seeing about 0.7 correlation with actual sales in the following week.,Discussion,"correlation, sales",0.9,Sharing correlation findings.
+**[00:06:49]** That's quite strong. Are we planning to integrate this into production models?,Question,"integration, production models",0.9,Inquiring about integration plans.
+"**[00:06:56]** That's the plan for next sprint, pending some data quality improvements.",Discussion,"integration, data quality",0.9,Discussing integration plans.
+**[00:07:03]** What kind of quality issues are we seeing?,Question,quality issues,0.9,Inquiring about quality issues.
+**[00:07:10]** Mainly noise from bot accounts and sponsored content skewing the sentiment.,Discussion,"quality issues, sentiment",0.9,Discussing quality issues.
+**[00:07:17]** *clearing throat* Excuse me. Have we considered using verified accounts only?,Question,verified accounts,0.9,Inquiring about using verified accounts.
+**[00:07:24]** We tried that but the sample size became too small for reliable predictions.,Discussion,"sample size, predictions",0.9,Explaining the issue with verified accounts.
+**[00:07:31]** What about weighting by follower count or engagement rates?,Question,"weighting, engagement",0.9,Inquiring about weighting methods.
+**[00:07:38]** That's actually what we're testing now. Results look promising.,Discussion,"weighting, results",0.9,Discussing current tests.
+**[00:07:45]** Great. Let's talk about the technical infrastructure for a moment.,Discussion,technical infrastructure,0.9,Shifting focus to technical infrastructure.
+"**[00:07:52]** *coffee cup clinking* Sorry, needed my morning caffeine fix.",Action,background noise,0.8,Addressing background noise.
+**[00:07:59]** Are we still having issues with the model deployment pipeline?,Question,model deployment,0.9,Inquiring about deployment issues.
+**[00:08:06]** We resolved the Docker container issues from last week.,Discussion,"Docker, issues",0.9,Confirming resolution of issues.
+**[00:08:13]** Excellent. What about the real-time data ingestion?,Question,data ingestion,0.9,Inquiring about data ingestion.
+**[00:08:20]** That's been stable. We're processing about 2 million transactions per hour now.,Discussion,"data ingestion, transactions",0.9,Sharing data ingestion status.
+"**[00:08:27]** *construction noise in background* Sorry, they're doing work next door.",Action,background noise,0.8,Addressing background noise.
+**[00:08:34]** No worries. So 2 million per hour - that's up from last month?,Question,"data ingestion, increase",0.9,Inquiring about increase in transactions.
+"**[00:08:41]** Yes, about 15% increase. Holiday shopping season is starting early this year.",Discussion,"increase, holiday",0.9,Discussing increase in transactions.
+**[00:08:48]** Are our servers handling the increased load okay?,Question,"servers, load",0.9,Inquiring about server performance.
+**[00:08:55]** So far so good. We have auto-scaling configured for peak times.,Discussion,"servers, auto-scaling",0.9,Confirming server handling.
+**[00:09:02]** What about data storage? Are we hitting any limits?,Question,"data storage, limits",0.9,Inquiring about data storage limits.
+**[00:09:09]** We're at about 70% capacity. Should be fine through the holidays.,Discussion,"data storage, capacity",0.9,Discussing data storage capacity.
+"**[00:09:16]** *doorbell ringing* Sorry, delivery. I'll stay muted.",Action,background noise,0.8,Addressing background noise.
+**[00:09:23]** Thanks. Let's discuss the dashboard updates for stakeholders.,Discussion,"dashboard, updates",0.9,Shifting focus to dashboard updates.
+**[00:09:30]** The new visualizations are ready for review. Much cleaner interface.,Discussion,"visualizations, interface",0.9,Sharing status of visualizations.
+**[00:09:37]** Great. Are the executives happy with the real-time forecasting display?,Question,"executives, forecasting",0.9,Inquiring about executive feedback.
+**[00:09:44]** They love it. Finally they can see predictions updating throughout the day.,Discussion,"executives, feedback",0.9,Confirming positive feedback.
+"**[00:09:51]** *child talking in background* Sorry, kids are home today. Let me find a quieter room.",Action,background noise,0.8,Addressing background noise.
+**[00:09:58]** No problem. So real-time updates - how often are we refreshing the models?,Question,"real-time updates, refresh",0.9,Inquiring about model refresh frequency.
+"**[00:10:05]** Every 4 hours during business hours, every 12 hours overnight.",Discussion,refresh frequency,0.9,Sharing refresh frequency.
+**[00:10:12]** That frequency working well for accuracy versus computational cost?,Question,"frequency, accuracy",0.9,Inquiring about effectiveness of frequency.
+"**[00:10:19]** Yes, we found diminishing returns beyond 4-hour intervals.",Discussion,diminishing returns,0.9,Discussing effectiveness of frequency.
+**[00:10:26]** Perfect. What about alerts for significant forecast changes?,Question,"alerts, forecast changes",0.9,Inquiring about alert system.
+**[00:10:33]** We have thresholds set at 15% deviation from previous forecast.,Discussion,"thresholds, alerts",0.9,Sharing alert thresholds.
+"**[00:10:40]** *connection dropping* Sorry, I think my internet is struggling again.",Action,connection,0.8,Addressing connection issue.
+**[00:10:47]** We can hear you fine. So 15% threshold - is that working well?,Question,"threshold, effectiveness",0.9,Inquiring about effectiveness of threshold.
+"**[00:10:54]** Yes, it catches the important changes without too many false alarms.",Discussion,"effectiveness, alerts",0.9,Confirming effectiveness of alerts.
+**[00:11:01]** Excellent. Let's talk about testing strategy for the holiday models.,Discussion,"testing strategy, holiday models",0.9,Shifting focus to testing strategy.
+**[00:11:08]** We're doing A/B testing with 10% of traffic on the new models.,Action,A/B testing,0.9,Discussing testing method.
+"**[00:11:15]** *keyboard typing loudly* Sorry, just updating my notes.",Action,notes,0.8,Addressing background noise.
+**[00:11:22]** A/B testing - how long before we have statistical significance?,Question,"A/B testing, statistical significance",0.9,Inquiring about testing timeline.
+**[00:11:29]** About two weeks with current traffic volumes.,Discussion,"timeline, A/B testing",0.9,Sharing timeline for significance.
+**[00:11:36]** That should give us time before the major holiday push starts.,Discussion,"timeline, holiday",0.9,Discussing timing.
+**[00:11:43]** Exactly. We'll have results by mid-September.,Discussion,"results, timeline",0.9,Confirming results timeline.
+**[00:11:50]** What metrics are we tracking for the A/B test?,Question,"metrics, A/B testing",0.9,Inquiring about metrics.
+"**[00:11:57]** Forecast accuracy, prediction confidence, and business impact on inventory.",Discussion,"metrics, A/B testing",0.9,Sharing metrics being tracked.
+"**[00:12:04]** *fire truck sirens passing by* Sorry, emergency vehicles outside.",Action,background noise,0.8,Addressing background noise.
+**[00:12:11]** No problem. Business impact - how are we measuring that?,Question,"business impact, measurement",0.9,Inquiring about measurement methods.
+**[00:12:18]** Primarily through stockout reduction and inventory turnover improvement.,Discussion,"business impact, measurement",0.9,Discussing measurement methods.
+**[00:12:25]** That's perfect. Those are the KPIs leadership cares about most.,Discussion,"KPIs, leadership",0.9,Confirming importance of metrics.
+"**[00:12:32]** Speaking of leadership, they want a demo next Friday.",Discussion,"leadership, demo",0.9,Discussing leadership request.
+"**[00:12:39]** *phone buzzing* Sorry, let me silence this completely.",Action,background noise,0.8,Addressing background noise.
+**[00:12:46]** Demo next Friday - are we ready for that timeline?,Question,"demo, timeline",0.9,Inquiring about readiness.
+**[00:12:53]** We should be. Just need to prepare some executive-friendly visualizations.,Discussion,"visualizations, executive-friendly",0.9,Confirming readiness.
+**[00:13:00]** I can help with that. What format do they prefer?,Question,"help, format",0.9,Offering assistance.
+**[00:13:07]** PowerBI dashboards with high-level summary metrics.,Discussion,"PowerBI, dashboards",0.9,Specifying preferred format.
+**[00:13:14]** *coughing* Excuse me. I'll have the draft ready by Wednesday for review.,Action,"draft, review",0.8,Addressing background noise.
+**[00:13:21]** Perfect. Any other urgent items we need to cover today?,Question,urgent items,0.9,Inquiring about additional items.
+**[00:13:28]** Just the model documentation updates for compliance.,Discussion,"documentation, compliance",0.9,Discussing documentation updates.
+"**[00:13:35]** Right, the audit requirements. Where are we on that?",Question,"audit, requirements",0.9,Inquiring about audit status.
+**[00:13:42]** About 80% complete. Should be finished by end of week.,Discussion,"audit, completion",0.9,Sharing audit completion status.
+"**[00:13:49]** *cat meowing loudly* Sorry, my cat wants attention apparently.",Action,background noise,0.8,Addressing background noise.
+"**[00:13:56]** No worries! Alright team, I think we've covered everything on the agenda.",Discussion,"agenda, summary",0.9,Summarizing the meeting.
+**[00:14:03]** Great meeting everyone. The progress on the holiday forecasting looks solid.,Discussion,"meeting, progress",0.9,Closing remarks.
+**[00:14:10]** Thanks all. Same time next week?,Question,next meeting,0.9,Inquiring about next meeting.
+**[00:14:17]** Works for me. I'll send out the calendar invite.,Action,"calendar, invite",0.9,Confirming next meeting.
+**[00:14:24]** Perfect. Have a great rest of your day everyone!,Discussion,"closing, farewell",0.9,Closing the meeting.
+"**[00:14:30]** Thanks, bye everyone!",Discussion,farewell,0.9,Farewell.
+**[00:14:35]** Bye! *various goodbyes overlapping*,Discussion,farewell,0.9,Goodbyes.

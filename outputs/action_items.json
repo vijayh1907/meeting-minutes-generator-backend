@@ -1,6 +1,6 @@
 {
   "meeting_date": "November 1, 2025",
-  "generated_at": "2025-11-01T21:26:38.907995",
+  "generated_at": "2025-11-02T21:08:18.911569",
   "total_items": 4,
   "action_items": [
     {
@@ -38,8 +38,8 @@
         "name": "Not specified",
         "email": null
       },
-      "due_date": "Wednesday, (05-11-2025)",
-      "due_date_calculated": "05-11-2025",
+      "due_date": "Wednesday, (03-11-2025)",
+      "due_date_calculated": "03-11-2025",
       "status": "pending",
       "created_from_meeting": "November 1, 2025",
       "priority": "medium",

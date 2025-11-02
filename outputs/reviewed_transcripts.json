@@ -1,6 +1,15 @@
 {
-  "meeting_id": "4",
+  "meeting_id": 3,
   "transcripts": [
+    {
+      "meeting_id": "3",
+      "confidence": 1,
+      "category": "pointer",
+      "needs_review": false,
+      "notes": "meeting id",
+      "raw_transcript_line": "meeting id",
+      "tags": ""
+    },
     {
       "raw_transcript_line": "# Financial Forecasting Team Meeting Transcript",
       "category": "Discussion",
@@ -168,8 +177,7 @@
         "router"
       ],
       "confidence": 0.8,
-      "notes": "Participant explaining WiFi issue.",
-      "old_category": "Discussion"
+      "notes": "Participant explaining WiFi issue."
     },
     {
       "raw_transcript_line": "**[00:01:22]** *coughing* Sorry, excuse me. So today we're reviewing our Q3 forecasting model performance.",
@@ -213,7 +221,7 @@
     },
     {
       "raw_transcript_line": "**[00:01:52]** Can you hear that echo? I think someone's not on mute.",
-      "category": "Question",
+      "category": "Noise",
       "tags": [
         "audio",
         "echo"
@@ -223,7 +231,7 @@
     },
     {
       "raw_transcript_line": "**[00:01:58]** Sorry, that was me. I'm muted now.",
-      "category": "Discussion",
+      "category": "Noise",
       "tags": [
         "audio",
         "mute"
@@ -253,7 +261,7 @@
     },
     {
       "raw_transcript_line": "**[00:02:19]** *phone ringing in background* Sorry, let me just silence this.",
-      "category": "Action",
+      "category": "Noise",
       "tags": [
         "background noise",
         "silence"
@@ -313,7 +321,7 @@
     },
     {
       "raw_transcript_line": "**[00:03:03]** Sorry, can you repeat that? My audio cut out for a second.",
-      "category": "Question",
+      "category": "Noise",
       "tags": [
         "audio",
         "repeat"

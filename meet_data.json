@@ -69,40 +69,11 @@
   {
     "id": "3",
     "title": "Financial Forecasting Team Meeting Transcript",
-    "date": "2025-09-03",
-    "status": "processing",
+    "date": "November 1, 2025  ",
     "fileName": "call_transcript.txt",
-    "fileSize": "19.30 KB",
-    "createdAt": "2025-09-03T17:59:37.623949",
-    "lastModified": "2025-09-03T17:59:37.623959",
-    "emailSent": false,
-    "participants": [
-      {
-        "id": "1",
-        "name": "John Smith",
-        "email": "john.smith@company.com"
-      },
-      {
-        "id": "2",
-        "name": "Sarah Johnson",
-        "email": "sarah.johnson@company.com"
-      },
-      {
-        "id": "3",
-        "name": "Mike Chen",
-        "email": "mike.chen@company.com"
-      }
-    ]
-  },
-  {
-    "id": "4",
-    "title": "Financial Forecasting Team Meeting Transcript",
-    "date": "November 1, 2025 ",
-    "status": "processing",
-    "fileName": "call_transcript.txt",
-    "fileSize": "10.12 KB",
-    "createdAt": "2025-11-01T19:44:28.187672",
-    "lastModified": "2025-11-01T19:44:28.187672",
+    "fileSize": 10365,
+    "createdAt": "2025-11-02T20:57:10.083154",
+    "lastModified": "2025-11-02T20:57:10.083154",
     "emailSent": false,
     "participants": [
       {
