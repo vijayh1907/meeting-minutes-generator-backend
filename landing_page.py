@@ -420,20 +420,52 @@ def process_mom_and_action_items(meeting_id=None, output_format="markdown"):
         raise
 
 
-@app.post("/review_content_classify")
+@app.post("/api/review_content_classify")
+@app.post("/api/review content classify")  # Handle space-separated version from frontend
+@app.post("/review_content_classify")  # Legacy endpoint support
 async def review_content(
-    transcripts_reviewed: str = Form(...)
-    # , next_id: str = Form(...)  # Add meeting_id parameter
+    transcripts_reviewed: List[dict]
 ):
-    """Review content and automatically generate MoM and action items"""
+    """Review content and automatically generate MoM and action items
+    
+    Accepts JSON body with array of classified transcript items.
+    Each item should have: raw_transcript_line, category, tags, confidence, notes, meeting_id
+    """
     global next_id
     try:
-        transcripts_reviewed = json.loads(transcripts_reviewed) 
-        if next_id is None:
+        # transcripts_reviewed is already parsed as a list from JSON body
+        print(f"[DEBUG] Received {len(transcripts_reviewed)} transcript items")
+        
+        # Try to extract meeting_id from the transcript items
+        meeting_title_from_payload = None
+        if next_id is None and transcripts_reviewed:
             for item in transcripts_reviewed:
                 if 'meeting_id' in item:
-                    next_id = int(item['meeting_id'])
+                    meeting_title_from_payload = item['meeting_id']
+                    # Try to find matching meeting in meet_data.json by title
+                    try:
+                        meetings = read_meetings_from_json()
+                        if meetings and isinstance(meetings, list):
+                            for meeting in meetings:
+                                if meeting.get("title") == meeting_title_from_payload:
+                                    next_id = str(meeting.get("id", ""))
+                                    print(f"[DEBUG] Found matching meeting in meet_data.json: id={next_id}, title={meeting_title_from_payload}")
+                                    break
+                        if next_id is None:
+                            # If not found, use the title as meeting_id (string)
+                            next_id = str(meeting_title_from_payload)
+                            print(f"[DEBUG] No matching meeting found, using title as meeting_id: {next_id}")
+                    except Exception as e:
+                        print(f"[DEBUG] Error looking up meeting: {e}")
+                        # Fallback: use the title as meeting_id
+                        next_id = str(meeting_title_from_payload) if meeting_title_from_payload else None
                     break
+        
+        if next_id is None:
+            # Last resort: use default ID
+            print(f"[DEBUG] Warning: Could not determine meeting_id, using default")
+            next_id = "1"
+        
         print(f"[DEBUG] Starting review_content for meeting_id: {next_id}")
         result = compare_and_flag_category_changes(transcripts_reviewed)
 
