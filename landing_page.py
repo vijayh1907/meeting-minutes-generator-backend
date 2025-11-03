@@ -786,6 +786,80 @@ def review_and_assign_action_items(reviewed_items: dict):
         print(f"[DEBUG] Full traceback: {traceback.format_exc()}")
         raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
 
+@app.post("/api/review_and_finalize_mom")
+def review_and_finalize_mom(finalized_data: dict):
+    """
+    API endpoint to receive and save the finalized MoM from frontend.
+    
+    Request body:
+    {
+        "mom_content": "# Minutes of Meeting...",
+        "action_items": [ ... ]
+    }
+    
+    Returns:
+    {
+        "status": "success",
+        "message": "MoM finalized and saved successfully",
+        "file_path": "outputs/minutes_of_meeting.md",
+        "file_size": 2682,
+        "action_items": [ ... ],
+        "saved_at": "2025-11-03T..."
+    }
+    """
+    print("[DEBUG] === Starting review_and_finalize_mom API ===")
+    
+    try:
+        # Extract data from request
+        mom_content = finalized_data.get("mom_content", "")
+        action_items = finalized_data.get("action_items", [])
+        print(f"[DEBUG] Received finalized MoM content and {len(action_items)} action items")
+
+        if not mom_content:
+            print(f"[DEBUG] No MoM content provided")
+            raise HTTPException(status_code=400, detail="mom_content is required")
+        
+        print(f"[DEBUG] MoM content length: {len(mom_content)} characters")
+        
+        # Save the finalized MoM to file
+        output_dir = "outputs"
+        mom_path = os.path.join(output_dir, "minutes_of_meeting.md")
+        
+        # Ensure output directory exists
+        os.makedirs(output_dir, exist_ok=True)
+        
+        print(f"[DEBUG] Saving finalized MoM to {mom_path}")
+        with open(mom_path, 'w', encoding='utf-8') as f:
+            f.write(mom_content)
+        
+        # Get file size
+        file_size = os.path.getsize(mom_path)
+        saved_at = datetime.now().isoformat()
+        
+        print(f"[DEBUG] MoM saved successfully, size: {file_size} bytes")
+        
+        # Return success response
+        response = {
+            "status": "success",
+            "message": "MoM finalized and saved successfully",
+            "action_items" : action_items,
+            "file_path": mom_path,
+            "file_size": file_size,
+            "saved_at": saved_at
+        }
+        
+        return JSONResponse(content=response)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"[DEBUG] === ERROR in review_and_finalize_mom ===")
+        print(f"[DEBUG] Error type: {type(e).__name__}")
+        print(f"[DEBUG] Error message: {str(e)}")
+        import traceback
+        print(f"[DEBUG] Full traceback: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=f"Error finalizing MoM: {str(e)}")
+
 
 # @app.post("/api/update_mom")
 # def update_mom():
