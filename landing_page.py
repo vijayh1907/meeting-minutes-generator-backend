@@ -10,6 +10,8 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Optional
 from datetime import datetime
+from quick_slack_notify import main as slack_notify
+from copy import deepcopy
 
 app = FastAPI()
 next_id = None
@@ -786,6 +788,109 @@ def review_and_assign_action_items(reviewed_items: dict):
         print(f"[DEBUG] Full traceback: {traceback.format_exc()}")
         raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
 
+def update_meet_data(email_sent: bool = False):
+    """Updated function with debugging and fixes"""
+    print("\n" + "="*60)
+    print("DEBUGGING: update_meet_data()")
+    print("="*60)
+    # Check current working directory
+    print(f"\nCurrent working directory: {os.getcwd()}")
+    # Read meetings
+    print("\n1. Reading meet_data.json...")
+    meet_data = read_meetings_from_json(filename="meet_data.json")
+    print(f"   ✓ Read {len(meet_data)} meetings")
+    # Find max meeting
+    print("\n2. Finding max meeting...")
+    max_meeting = max(meet_data, key=lambda x: int(x['id']))
+    print(f"   ✓ Found max meeting with ID: {max_meeting['id']}")
+    print(f"   Title: {max_meeting['title']}")
+    # Create copy and remove
+    print("\n3. Creating copy and removing max meeting...")
+    new_meet_data = deepcopy(meet_data)
+    print(f"   Before remove: {len(new_meet_data)} meetings")
+    new_meet_data.remove(max_meeting)
+    print(f"   After remove: {len(new_meet_data)} meetings")
+    # Load additional data
+    output_dir = "outputs"
+    print("\n4. Loading additional data...")
+    max_meeting['emailSent'] = email_sent
+    print(f"   ✓ Set emailSent to {email_sent}")
+    # Load reviewed transcripts
+    reviewed_transcript_file_path = os.path.join(output_dir, "reviewed_transcripts.json")
+    print(f"   Loading: {reviewed_transcript_file_path}")
+    if os.path.exists(reviewed_transcript_file_path):
+        with open(reviewed_transcript_file_path, encoding="utf-8") as f:
+            reviewed_classification_data = json.load(f)
+        max_meeting['reviewed_classification_data'] = reviewed_classification_data['transcripts']
+        print(f"   ✓ Loaded reviewed transcripts")
+    else:
+        print(f"   ⚠ File not found: {reviewed_transcript_file_path}")
+    # Load MoM
+    MoM_file_path = os.path.join(output_dir, "minutes_of_meeting.md")
+    print(f"   Loading: {MoM_file_path}")
+    if os.path.exists(MoM_file_path):
+        with open(MoM_file_path, encoding="utf-8") as f:
+            MoM_content = f.read()
+        max_meeting['MoM_content'] = MoM_content
+        print(f"   ✓ Loaded MoM (length: {len(MoM_content)} chars)")
+    else:
+        print(f"   ⚠ File not found: {MoM_file_path}")
+    # Load action items
+    action_items_file_path = os.path.join(output_dir, "action_items.json")
+    print(f"   Loading: {action_items_file_path}")
+    if os.path.exists(action_items_file_path):
+        with open(action_items_file_path, encoding="utf-8") as f:
+            action_items_data = json.load(f)
+        max_meeting['action_items'] = action_items_data.get("action_items", [])
+        print(f"   ✓ Loaded {len(max_meeting['action_items'])} action items")
+    else:
+        print(f"   ⚠ File not found: {action_items_file_path}")
+    
+    print("\n5. Modified max_meeting:")
+    print(f"   Keys: {list(max_meeting.keys())}")
+    # Append back
+    print("\n6. Appending modified meeting back to list...")
+    new_meet_data.append(max_meeting)
+    print(f"   ✓ List now has {len(new_meet_data)} meetings")
+    # Write to file
+    print("\n7. Writing to meet_data.json...")
+    output_file = "meet_data.json"
+    output_path = os.path.abspath(output_file)
+    print(f"   Full path: {output_path}")
+    try:
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(new_meet_data, f, indent=2, ensure_ascii=False)
+        print(f"   ✓ File written successfully")
+        # Verify file size
+        file_size = os.path.getsize(output_file)
+        print(f"   File size: {file_size} bytes")
+    except Exception as e:
+        print(f"   ❌ ERROR writing file: {e}")
+        raise
+    # Verify by reading back
+    print("\n8. Verifying by reading back...")
+    with open(output_file, 'r', encoding='utf-8') as f:
+        verify_data = json.load(f)
+    print(f"   ✓ File contains {len(verify_data)} meetings")
+    
+    # Check if max_meeting is in the file with new fields
+    max_meeting_in_file = next((m for m in verify_data if m['id'] == max_meeting['id']), None)
+    if max_meeting_in_file:
+        print(f"   ✓ Max meeting found in file")
+        print(f"   Keys in file: {list(max_meeting_in_file.keys())}")
+        if 'MoM_content' in max_meeting_in_file:
+            print(f"   ✓ MoM_content is present in file")
+        if 'action_items' in max_meeting_in_file:
+            print(f"   ✓ action_items is present in file")
+    else:
+        print(f"   ❌ Max meeting NOT found in file!")
+    
+    print("\n" + "="*60)
+    print("✓ Update completed successfully!")
+    print("="*60)
+    
+    return new_meet_data
+
 @app.post("/api/review_and_finalize_mom")
 def review_and_finalize_mom(finalized_data: dict):
     """
@@ -837,7 +942,21 @@ def review_and_finalize_mom(finalized_data: dict):
         saved_at = datetime.now().isoformat()
         
         print(f"[DEBUG] MoM saved successfully, size: {file_size} bytes")
-        
+        # Send slack notification or email if needed
+        try:
+            slack_notify()
+            print(f"[DEBUG] Slack notification sent successfully")
+            emailSent = True
+        except Exception as e:
+            print(f"[DEBUG] Error sending Slack notification: {e}")
+            emailSent = False
+
+        # Update meet_data.json with finalized MoM and reviewed classification data
+        print(f"[DEBUG] Updating meet_data.json with finalized MoM and reviewed data...")
+        update_meet_data(email_sent=emailSent)
+        print(f"[DEBUG] meet_data.json updated successfully")
+
+
         # Return success response
         response = {
             "status": "success",

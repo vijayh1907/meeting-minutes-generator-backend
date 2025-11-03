@@ -1,17 +1,17 @@
 {
   "meeting_date": "November 1, 2025",
-  "generated_at": "2025-11-02T21:08:18.911569",
-  "total_items": 4,
+  "generated_at": "2025-11-03T12:01:22.828245",
+  "total_items": 5,
   "action_items": [
     {
       "id": "action_001",
       "description": "Share the agenda for today's sprint review.",
       "owner": {
-        "name": "Not specified",
-        "email": null
+        "name": "Soumya Paul",
+        "email": "soumyapaul22@gmail.com"
       },
-      "due_date": "Not specified",
-      "due_date_calculated": null,
+      "due_date": "Friday, (01-11-2025)",
+      "due_date_calculated": "01-11-2025",
       "status": "pending",
       "created_from_meeting": "November 1, 2025",
       "priority": "medium",
@@ -19,24 +19,10 @@
     },
     {
       "id": "action_002",
-      "description": "Adjust settings to address feedback.",
-      "owner": {
-        "name": "Not specified",
-        "email": null
-      },
-      "due_date": "Not specified",
-      "due_date_calculated": null,
-      "status": "pending",
-      "created_from_meeting": "November 1, 2025",
-      "priority": "medium",
-      "tags": []
-    },
-    {
-      "id": "action_003",
       "description": "Prepare the draft for review by Wednesday.",
       "owner": {
-        "name": "Not specified",
-        "email": null
+        "name": "Soumya Paul",
+        "email": "soumyapaul22@gmail.com"
       },
       "due_date": "Wednesday, (03-11-2025)",
       "due_date_calculated": "03-11-2025",
@@ -46,14 +32,42 @@
       "tags": []
     },
     {
-      "id": "action_004",
-      "description": "Send out the calendar invite.",
+      "id": "action_003",
+      "description": "Send out the calendar invite for the next meeting.",
       "owner": {
-        "name": "Not specified",
-        "email": null
+        "name": "Soumya Paul",
+        "email": "soumyapaul22@gmail.com"
       },
-      "due_date": "Not specified",
-      "due_date_calculated": null,
+      "due_date": "Friday, (01-11-2025)",
+      "due_date_calculated": "01-11-2025",
+      "status": "pending",
+      "created_from_meeting": "November 1, 2025",
+      "priority": "medium",
+      "tags": []
+    },
+    {
+      "id": "action_004",
+      "description": "Prepare executive-friendly visualizations for the demo next Friday.",
+      "owner": {
+        "name": "Soumya Paul",
+        "email": "soumyapaul22@gmail.com"
+      },
+      "due_date": "Friday, (08-11-2025)",
+      "due_date_calculated": "08-11-2025",
+      "status": "pending",
+      "created_from_meeting": "November 1, 2025",
+      "priority": "medium",
+      "tags": []
+    },
+    {
+      "id": "action_005",
+      "description": "Complete model documentation updates for compliance.",
+      "owner": {
+        "name": "Soumya Paul",
+        "email": "soumyapaul22@gmail.com"
+      },
+      "due_date": "End of week, (07-11-2025)",
+      "due_date_calculated": "07-11-2025",
       "status": "pending",
       "created_from_meeting": "November 1, 2025",
       "priority": "medium",
