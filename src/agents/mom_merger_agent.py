@@ -34,6 +34,8 @@ def build_mom_merger_agent(model: str = "openai/gpt-4o-mini",
             "updating only the action items section. You have excellent date calculation skills - when an action item "
             "mentions a day name (like 'Monday' or 'Wednesday') without a calculated date, you determine the actual "
             "calendar date by finding the next occurrence of that day after the meeting date. "
+            "when 'Today', 'Tomorrow', 'End of this week' etc. are mentioned, you calculate the exact date accordingly, "
+            "so due date is always clear and unambiguous and based on the meeting date. "
             "You know that each action item should clearly display: description, owner (with email), due date "
             "(with calculated calendar date), priority, and status. "
             "You format action items in a clean, scannable way that stakeholders can quickly understand."

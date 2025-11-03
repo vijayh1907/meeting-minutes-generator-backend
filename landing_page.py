@@ -420,7 +420,7 @@ def process_mom_and_action_items(meeting_id=None, output_format="markdown"):
         raise
 
 
-@app.post("/api/review_content_classify")
+
 @app.post("/api/review content classify")  # Handle space-separated version from frontend
 @app.post("/review_content_classify")  # Legacy endpoint support
 async def review_content(
@@ -504,251 +504,6 @@ async def review_content(
         print(f"[DEBUG] Full traceback: {traceback.format_exc()}")
         raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
 
-
-
-
-@app.post("/api/create_mom_and_action_items")
-async def create_mom_and_action_items(
-    meeting_id: str = Form(None),
-    output_format: str = Form("markdown")  # Options: markdown, json, both
-):
-    """
-    Generate Minutes of Meeting (MoM) and Action Items from reviewed transcripts.
-    
-    Args:
-        meeting_id: Optional meeting ID for reference (uses next_id if not provided)
-        output_format: Output format - 'markdown' (default), 'json', or 'both'
-    
-    Returns:
-        JSON response with paths to generated files and action items summary
-    """
-    global next_id
-    
-    print(f"[DEBUG] === Starting create_mom_and_action_items ===")
-    print(f"[DEBUG] Received parameters:")
-    print(f"[DEBUG]   - meeting_id: {meeting_id or next_id}")
-    print(f"[DEBUG]   - output_format: {output_format}")
-    
-    try:
-        # Use provided meeting_id or fall back to next_id
-        current_meeting_id = meeting_id or next_id
-        if not current_meeting_id:
-            print(f"[DEBUG] ERROR: No meeting_id available")
-            raise HTTPException(status_code=400, detail="Meeting ID not found. Please upload meeting files first.")
-        
-        # Define paths
-        input_file = "outputs/reviewed_transcripts.json"
-        output_dir = "outputs"
-        model = "openai/gpt-4o-mini"
-        temperature = 0.2
-        
-        print(f"[DEBUG] Configuration:")
-        print(f"[DEBUG]   - input_file: {input_file}")
-        print(f"[DEBUG]   - output_dir: {output_dir}")
-        print(f"[DEBUG]   - model: {model}")
-        print(f"[DEBUG]   - temperature: {temperature}")
-        
-        # Check if input file exists
-        if not os.path.exists(input_file):
-            print(f"[DEBUG] ERROR: Input file not found: {input_file}")
-            raise HTTPException(
-                status_code=404, 
-                detail=f"Reviewed transcripts file not found. Please review the content first."
-            )
-        
-        print(f"[DEBUG] Input file found: {input_file}")
-        print(f"[DEBUG] Starting MoM generation with crewAgent2...")
-        
-        # Call crewAgent2.main to generate MoM and action items
-        try:
-            start_time = time.time()
-            crewAgent2_main(
-                in_path=input_file,
-                out_dir=output_dir,
-                model=model,
-                temperature=temperature,
-                output_format=output_format
-            )
-            end_time = time.time()
-            exec_time = end_time - start_time
-            minutes = int(exec_time // 60)
-            seconds = int(exec_time % 60)
-            print(f"[DEBUG] MoM generation completed successfully")
-            print(f"[DEBUG] Process execution time: {minutes} min {seconds} sec")
-        except Exception as e:
-            print(f"[DEBUG] Error in MoM generation: {e}")
-            print(f"[DEBUG] Error type: {type(e).__name__}")
-            import traceback
-            print(f"[DEBUG] Full traceback: {traceback.format_exc()}")
-            raise HTTPException(status_code=500, detail=f"Error generating MoM: {str(e)}")
-        
-        # Prepare response with file paths
-        response_data = {
-            "meeting_id": current_meeting_id,
-            "status": "success",
-            "message": "Minutes of Meeting and Action Items generated successfully",
-            "execution_time": f"{minutes} min {seconds} sec",
-            "files_generated": []
-        }
-        
-        # Check for generated files and add to response
-        mom_md_path = os.path.join(output_dir, "minutes_of_meeting.md")
-        mom_json_path = os.path.join(output_dir, "minutes_of_meeting.json")
-        action_items_path = os.path.join(output_dir, "action_items.json")
-        
-        if os.path.exists(mom_md_path):
-            print(f"[DEBUG] Found: {mom_md_path}")
-            response_data["files_generated"].append({
-                "type": "minutes_markdown",
-                "path": mom_md_path,
-                "size": os.path.getsize(mom_md_path)
-            })
-        
-        if os.path.exists(mom_json_path):
-            print(f"[DEBUG] Found: {mom_json_path}")
-            response_data["files_generated"].append({
-                "type": "minutes_json",
-                "path": mom_json_path,
-                "size": os.path.getsize(mom_json_path)
-            })
-        
-        # Read and include action items in response
-        if os.path.exists(action_items_path):
-            print(f"[DEBUG] Found: {action_items_path}")
-            try:
-                with open(action_items_path, 'r', encoding='utf-8') as f:
-                    action_items_data = json.load(f)
-                
-                response_data["files_generated"].append({
-                    "type": "action_items_json",
-                    "path": action_items_path,
-                    "size": os.path.getsize(action_items_path)
-                })
-                
-                response_data["action_items"] = action_items_data
-                response_data["action_items_count"] = action_items_data.get("total_items", 0)
-                
-                print(f"[DEBUG] Action items loaded: {response_data['action_items_count']} items")
-            except Exception as e:
-                print(f"[DEBUG] Error reading action items: {e}")
-                response_data["action_items_error"] = str(e)
-        
-        # Read MoM content to include in response (optional, for preview)
-        if os.path.exists(mom_md_path):
-            try:
-                with open(mom_md_path, 'r', encoding='utf-8') as f:
-                    mom_content = f.read()
-                response_data["mom_preview"] = mom_content[:500] + "..." if len(mom_content) > 500 else mom_content
-            except Exception as e:
-                print(f"[DEBUG] Error reading MoM preview: {e}")
-        
-        print(f"[DEBUG] === MoM generation completed successfully ===")
-        print(f"[DEBUG] Generated {len(response_data['files_generated'])} files")
-        
-        return JSONResponse(content=response_data)
-        
-    except HTTPException:
-        # Re-raise HTTP exceptions
-        print(f"[DEBUG] Re-raising HTTP exception")
-        raise
-    except Exception as e:
-        print(f"[DEBUG] === UNEXPECTED ERROR ===")
-        print(f"[DEBUG] Error type: {type(e).__name__}")
-        print(f"[DEBUG] Error message: {str(e)}")
-        import traceback
-        print(f"[DEBUG] Full traceback: {traceback.format_exc()}")
-        raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
-
-
-@app.post("/api/review_and_assign_action_items")
-async def review_and_assign_action_items(
-    action_items_reviewed: str = Form(...)  # JSON string, parse in backend
-):
-    """
-    Review and assign action items after MoM generation.
-    Allows users to modify action item details (owner, due date, priority, etc.)
-    before finalizing them.
-    
-    Args:
-        action_items_reviewed: JSON string containing reviewed action items
-        
-    Returns:
-        The reviewed and updated action items
-    """
-    global next_id
-    
-    print(f"[DEBUG] === Starting review_and_assign_action_items ===")
-    
-    try:
-        # Parse the JSON string
-        print(f"[DEBUG] Parsing action_items_reviewed JSON...")
-        try:
-            action_items_reviewed = json.loads(action_items_reviewed)
-            print(f"[DEBUG] Successfully parsed action items")
-        except json.JSONDecodeError as e:
-            print(f"[DEBUG] JSON decode error: {e}")
-            raise HTTPException(status_code=422, detail=f"Invalid JSON format: {str(e)}")
-        
-        # Get the original action items for comparison
-        output_dir = "outputs"
-        original_path = os.path.join(output_dir, "action_items.json")
-        
-        if os.path.exists(original_path):
-            print(f"[DEBUG] Loading original action items from {original_path}")
-            try:
-                with open(original_path, 'r', encoding='utf-8') as f:
-                    original_data = json.load(f)
-                print(f"[DEBUG] Original action items loaded successfully")
-            except Exception as e:
-                print(f"[DEBUG] Warning: Could not load original action items: {e}")
-                original_data = None
-        else:
-            print(f"[DEBUG] No original action items file found")
-            original_data = None
-        
-        # Process and flag changes
-        result = compare_and_flag_action_item_changes(action_items_reviewed, original_data)
-        
-        # Create the updated structure
-        updated_action_items = {
-            "meeting_id": next_id,
-            "reviewed_at": __import__('datetime').datetime.now().isoformat(),
-            "total_items": len(result) if isinstance(result, list) else result.get("total_items", 0),
-            "action_items": result if isinstance(result, list) else result.get("action_items", [])
-        }
-        
-        # If the original data had additional metadata, preserve it
-        if original_data and isinstance(original_data, dict):
-            if "meeting_date" in original_data:
-                updated_action_items["meeting_date"] = original_data["meeting_date"]
-            if "generated_at" in original_data:
-                updated_action_items["generated_at"] = original_data["generated_at"]
-        
-        # Save to reviewed_action_items.json
-        # reviewed_path = os.path.join(output_dir, "reviewed_action_items.json")
-        # over write the action_items.json file with reviewed items
-        reviewed_path = os.path.join(output_dir, "action_items.json")
-        print(f"[DEBUG] Saving reviewed action items to {reviewed_path}")
-        
-        with open(reviewed_path, "w", encoding="utf-8") as f:
-            json.dump(updated_action_items, f, indent=2, ensure_ascii=False)
-        
-        print(f"[DEBUG] Reviewed action items saved successfully")
-        print(f"[DEBUG] Total items: {updated_action_items['total_items']}")
-        
-        # Return the action items array for display
-        return JSONResponse(content=updated_action_items["action_items"])
-        
-    except HTTPException:
-        print(f"[DEBUG] Re-raising HTTP exception")
-        raise
-    except Exception as e:
-        print(f"[DEBUG] === UNEXPECTED ERROR ===")
-        print(f"[DEBUG] Error type: {type(e).__name__}")
-        print(f"[DEBUG] Error message: {str(e)}")
-        import traceback
-        print(f"[DEBUG] Full traceback: {traceback.format_exc()}")
-        raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
 
 
 def compare_and_flag_action_item_changes(reviewed_items, original_data):
@@ -857,88 +612,210 @@ def compare_and_flag_action_item_changes(reviewed_items, original_data):
     
     return reviewed_list
 
-@app.post("/api/update_mom")
-def update_mom():
+
+
+# =====================================================
+# EXTRACTED FUNCTION - Update MoM with Reviewed Items
+# =====================================================
+
+def update_mom_with_reviewed_items(output_dir: str = "outputs", 
+                                    model: str = "openai/gpt-4o-mini",
+                                    temperature: float = 0.2):
     """
-    API to merge reviewed action items with MoM and return the updated content.
-    Runs crewAgent3.py to generate updated_minutes_of_meeting.md
+    Function to merge reviewed action items with MoM and extract final items.
+    This function can be called from multiple API endpoints.
+    
+    Args:
+        output_dir: Output directory containing MoM and action items
+        model: LLM model to use for crewAgent3
+        temperature: Temperature setting for LLM
+        
+    Returns:
+        dict: Contains updated_mom_content, action_items, and metadata
+        
+    Raises:
+        FileNotFoundError: If required files don't exist
+        Exception: For other processing errors
     """
-    print("[DEBUG] === Starting update_mom API ===")
+    print(f"[DEBUG] update_mom_with_reviewed_items: Starting...")
+    
+    mom_path = os.path.join(output_dir, "minutes_of_meeting.md")
+    action_items_path = os.path.join(output_dir, "action_items.json")
+    
+    # Validate input files exist
+    if not os.path.exists(mom_path):
+        print(f"[DEBUG] MoM file not found: {mom_path}")
+        raise FileNotFoundError(f"minutes_of_meeting.md not found at {mom_path}")
+    
+    if not os.path.exists(action_items_path):
+        print(f"[DEBUG] Action items file not found: {action_items_path}")
+        raise FileNotFoundError(f"action_items.json not found at {action_items_path}")
+    
+    print(f"[DEBUG] Input files validated")
+    print(f"[DEBUG]   MoM path: {mom_path}")
+    print(f"[DEBUG]   Action items path: {action_items_path}")
+    
+    # Import and run crewAgent3
+    print(f"[DEBUG] Running crewAgent3 to merge action items...")
+    from crewAgent3 import main as crewAgent3_main
+    
+    # Run crewAgent3 with no-backup option
+    crewAgent3_main(
+        mom_path=mom_path,
+        action_items_path=action_items_path,
+        out_dir=output_dir,
+        model=model,
+        temperature=temperature,
+        backup=False
+    )
+    
+    print(f"[DEBUG] crewAgent3 execution completed")
+    
+    # Check if updated MoM was created
+    if not os.path.exists(mom_path):
+        print(f"[DEBUG] Updated MoM not created: {mom_path}")
+        raise FileNotFoundError("Failed to create updated MoM")
+    
+    # Read the updated MoM content
+    print(f"[DEBUG] Reading updated MoM from {mom_path}")
+    with open(mom_path, 'r', encoding='utf-8') as f:
+        updated_mom_content = f.read()
+    
+    print(f"[DEBUG] Updated MoM read successfully, size: {len(updated_mom_content)} chars")
+    
+    # Read the reviewed action items to return them
+    with open(action_items_path, 'r', encoding='utf-8') as f:
+        reviewed_action_items = json.load(f)
+    
+    # Prepare response data
+    response_data = {
+        "status": "success",
+        "message": "MoM updated successfully with reviewed action items",
+        "updated_mom_content": updated_mom_content,
+        "action_items": reviewed_action_items.get("action_items", []),
+        "total_action_items": reviewed_action_items.get("total_items", 0),
+        "meeting_date": reviewed_action_items.get("meeting_date", "Unknown"),
+        "updated_at": datetime.now().isoformat()
+    }
+    
+    print(f"[DEBUG] Returning response with {response_data['total_action_items']} action items")
+    return response_data
+
+
+# =====================================================
+# API ENDPOINTS
+# =====================================================
+
+@app.post("/api/review_and_assign_action_items")
+def review_and_assign_action_items(reviewed_items: dict):
+    """
+    API endpoint to receive reviewed action items from frontend.
+    Saves reviewed items to action_items.json and updates MoM.
+    
+    Request body example:
+    {
+        "action_items": [
+            {
+                "id": "action_001",
+                "description": "Updated description",
+                "owner": {"name": "John Doe", "email": "john@example.com"},
+                "due_date": "Friday",
+                "priority": "high",
+                "status": "pending",
+                "tags": []
+            }
+        ],
+        "meeting_date": "November 1, 2025",
+        "total_items": 3
+    }
+    
+    Returns:
+        JSONResponse with updated MoM content and final action items
+    """
+    print("[DEBUG] === Starting review_and_assign_action_items API ===")
     
     try:
+        reviewed_items_obj = json.loads(reviewed_items) if isinstance(reviewed_items, str) else reviewed_items
+        # Extract data from request
+        action_items = reviewed_items_obj.get("action_items", [])
+        meeting_date = reviewed_items_obj.get("meeting_date", "Unknown")
+        total_items = reviewed_items_obj.get("total_items", len(action_items))
+        
+        print(f"[DEBUG] Received {total_items} reviewed action items")
+        print(f"[DEBUG] Meeting date: {meeting_date}")
+        
+        # Save reviewed action items to file
         output_dir = "outputs"
-        mom_path = os.path.join(output_dir, "minutes_of_meeting.md")
         action_items_path = os.path.join(output_dir, "action_items.json")
-        updated_mom_path = os.path.join(output_dir, "minutes_of_meeting.md")
         
-        # Validate input files exist
-        if not os.path.exists(mom_path):
-            print(f"[DEBUG] MoM file not found: {mom_path}")
-            raise HTTPException(status_code=404, detail=f"minutes_of_meeting.md not found. Please generate MoM first.")
-        
-        if not os.path.exists(action_items_path):
-            print(f"[DEBUG] Reviewed action items not found: {action_items_path}")
-            raise HTTPException(status_code=404, detail=f"action_items.json not found. Please review action items first.")
-        
-        print(f"[DEBUG] Input files validated")
-        print(f"[DEBUG] MoM path: {mom_path}")
-        print(f"[DEBUG] Action items path: {action_items_path}")
-        
-        # Import and run crewAgent3
-        print(f"[DEBUG] Running crewAgent3 to merge action items...")
-        from crewAgent3 import main as crewAgent3_main
-        
-        # Run crewAgent3 with no-backup option
-        crewAgent3_main(
-            mom_path=mom_path,
-            action_items_path=action_items_path,
-            out_dir=output_dir,
-            model="openai/gpt-4o-mini",
-            temperature=0.2,
-            backup=False
-        )
-        
-        print(f"[DEBUG] crewAgent3 execution completed")
-        
-        # Check if updated MoM was created
-        if not os.path.exists(updated_mom_path):
-            print(f"[DEBUG] Updated MoM not created: {updated_mom_path}")
-            raise HTTPException(status_code=500, detail="Failed to create updated MoM")
-        
-        # Read the updated MoM content
-        print(f"[DEBUG] Reading updated MoM from {updated_mom_path}")
-        with open(updated_mom_path, 'r', encoding='utf-8') as f:
-            updated_mom_content = f.read()
-        
-        print(f"[DEBUG] Updated MoM read successfully, size: {len(updated_mom_content)} chars")
-        
-        # Also read the reviewed action items to return them
-        with open(action_items_path, 'r', encoding='utf-8') as f:
-            reviewed_action_items = json.load(f)
-        
-        # Return the updated MoM content and action items
-        response_data = {
-            "status": "success",
-            "message": "MoM updated successfully with reviewed action items",
-            "updated_mom_content": updated_mom_content,
-            "action_items": reviewed_action_items.get("action_items", []),
-            "total_action_items": reviewed_action_items.get("total_items", 0),
-            "updated_at": datetime.now().isoformat()
+        reviewed_data = {
+            "meeting_date": meeting_date,
+            "total_items": total_items,
+            "action_items": action_items,
+            "generated_at": datetime.now().isoformat()
         }
         
-        print(f"[DEBUG] Returning response with {response_data['total_action_items']} action items")
-        return JSONResponse(content=response_data)
+        print(f"[DEBUG] Saving reviewed action items to {action_items_path}")
+        with open(action_items_path, 'w', encoding='utf-8') as f:
+            json.dump(reviewed_data, f, indent=2, ensure_ascii=False)
         
-    except HTTPException:
-        print(f"[DEBUG] Re-raising HTTP exception")
-        raise
+        print(f"[DEBUG] Reviewed action items saved successfully")
+        
+        # Call the function to update MoM with reviewed items
+        print(f"[DEBUG] Calling update_mom_with_reviewed_items function...")
+        update_response = update_mom_with_reviewed_items(
+            output_dir=output_dir,
+            model="openai/gpt-4o-mini",
+            temperature=0.2
+        )
+        
+        print(f"[DEBUG] MoM updated successfully")
+        print(f"[DEBUG] Total action items in response: {update_response['total_action_items']}")
+        
+        # Return the response
+        return JSONResponse(content=update_response)
+        
+    except FileNotFoundError as e:
+        print(f"[DEBUG] File not found: {e}")
+        raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:
-        print(f"[DEBUG] === ERROR in update_mom ===")
+        print(f"[DEBUG] === ERROR in review_and_assign_action_items ===")
         print(f"[DEBUG] Error type: {type(e).__name__}")
         print(f"[DEBUG] Error message: {str(e)}")
         import traceback
         print(f"[DEBUG] Full traceback: {traceback.format_exc()}")
-        raise HTTPException(status_code=500, detail=f"Error updating MoM: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
+
+
+# @app.post("/api/update_mom")
+# def update_mom():
+#     """
+#     Standalone API to merge reviewed action items with MoM.
+#     Now calls the extracted update_mom_with_reviewed_items function.
+#     """
+#     print("[DEBUG] === Starting update_mom API ===")
+#     
+#     try:
+#         # Call the extracted function
+#         update_response = update_mom_with_reviewed_items(
+#             output_dir="outputs",
+#             model="openai/gpt-4o-mini",
+#             temperature=0.2
+#         )
+#         
+#         return JSONResponse(content=update_response)
+#         
+#     except FileNotFoundError as e:
+#         print(f"[DEBUG] File not found: {e}")
+#         raise HTTPException(status_code=404, detail=str(e))
+#     except Exception as e:
+#         print(f"[DEBUG] === ERROR in update_mom ===")
+#         print(f"[DEBUG] Error type: {type(e).__name__}")
+#         print(f"[DEBUG] Error message: {str(e)}")
+#         import traceback
+#         print(f"[DEBUG] Full traceback: {traceback.format_exc()}")
+#         raise HTTPException(status_code=500, detail=f"Error updating MoM: {str(e)}")
+
 
 @app.get("/health")
 def health():

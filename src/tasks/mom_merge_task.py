@@ -35,8 +35,15 @@ CRITICAL INSTRUCTIONS:
    
    a) If due_date is "Not specified" and due_date_calculated is null:
       - Keep as "Not specified"
-   
-   b) If due_date contains a day name (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday) 
+   b) Consider to capture date  with resptect to meetining date for cases Today, Tomorrow, End of this week, Next week, EOD etc.
+      - Example : If meeting date is "November 1, 2025" and due_date says "Today":
+        * Format as: "Friday, (01-11-2025)"
+      - Example : If meeting date is "November 1, 2025" and if due_date says "Tomorrow":
+        * Format as: "Saturday, (02-11-2025)"
+      - Example : If meeting date is "November 1, 2025" and due_date says "End of this week":
+         * End of this week is Sunday, November 3, 2025
+         * Format: "Sunday, (03-11-2025)"
+   c) If due_date contains a day name (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday) 
       AND due_date_calculated is null:
       - Extract the meeting date from the MoM (from "Date and Time" section)
       - Calculate which date that day falls on AFTER the meeting date
@@ -48,10 +55,10 @@ CRITICAL INSTRUCTIONS:
         * Next Wednesday is November 5, 2025
         * Format: "Wednesday, (05-11-2025)"
    
-   c) If due_date already has a calculated date in format "Day, (DD-MM-YYYY)":
+   d) If due_date already has a calculated date in format "Day, (DD-MM-YYYY)":
       - Use it as-is
    
-   d) If due_date_calculated exists and is not null:
+   e) If due_date_calculated exists and is not null:
       - Use the format: "DayName, (due_date_calculated)"
 
 4. **UPDATE ONLY THE ACTION ITEMS SECTION**:
